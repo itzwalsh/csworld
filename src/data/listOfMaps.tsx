@@ -1,0 +1,58 @@
+export const listOfMaps = [
+  {
+    id: 1,
+    name: "Inferno",
+    path: "/inferno",
+    background: "/inferno-background.png",
+    logo: "/inferno-logo.png",
+  },
+  {
+    id: 2,
+    name: "Nuke",
+    path: "/nuke",
+    background: "/nuke-background.png",
+    logo: "/nuke-logo.png",
+  },
+  {
+    id: 3,
+    name: "Vertigo",
+    path: "/vertigo",
+    background: "/vertigo-background.png",
+    logo: "/vertigo-logo.png",
+  },
+  {
+    id: 4,
+    name: "Mirage",
+    path: "/mirage",
+    background: "/mirage-background.png",
+    logo: "/mirage-logo.png",
+  },
+  {
+    id: 5,
+    name: "Overpass",
+    path: "/overpass",
+    background: "/overpass-background.png",
+    logo: "/overpass-logo.png",
+  },
+  {
+    id: 6,
+    name: "Ancient",
+    path: "/ancient",
+    background: "/ancient-background.png",
+    logo: "/ancient-logo.png",
+  },
+  {
+    id: 7,
+    name: "Anubis",
+    path: "/anubis",
+    background: "/anubis-background.png",
+    logo: "/anubis-logo.png",
+  },
+  {
+    id: 8,
+    name: "Dust 2",
+    path: "/dust2",
+    background: "/dust2-background.png",
+    logo: "/dust2-logo.png",
+  },
+];
