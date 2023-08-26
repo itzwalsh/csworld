@@ -50,7 +50,11 @@ const UserDropdown = () => {
                 className="aspect-square w-10 rounded-full bg-white"
               />
             </a>
+<<<<<<< HEAD
             <a className="max-w-[100px] flex-grow overflow-hidden whitespace-nowrap text-sm font-bold text-inherit">
+=======
+            <a className="max-w-[100px] flex-grow overflow-hidden overflow-ellipsis whitespace-nowrap text-sm font-bold text-inherit">
+>>>>>>> c07e9c2e56c03ceed2796dba4960dae52c36d4f4
               {user?.username ?? "User Name"}
             </a>
           </div>
@@ -92,7 +96,11 @@ const Nav = () => {
     <div>
       <nav>
         <div className="mx-auto flex flex-wrap items-center justify-start gap-8">
+<<<<<<< HEAD
           <Navbar disableAnimation isBordered maxWidth="2xl">
+=======
+          <Navbar disableAnimation isBordered>
+>>>>>>> c07e9c2e56c03ceed2796dba4960dae52c36d4f4
             <NavbarContent className="sm:hidden" justify="start">
               <NavbarMenuToggle />
             </NavbarContent>

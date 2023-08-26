@@ -7,6 +7,7 @@ import { generateSSGHelper } from "~/server/helpers/serverSideHelper";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import Link from "next/link";
 import { PageLayout } from "~/components/layout";
+<<<<<<< HEAD
 import RecentMatches from "~/components/RecentMatches";
 import { env } from "process";
 
@@ -38,10 +39,35 @@ async function getMatchStatsFromIds(matchIds: string[]): Promise<any[]> {
 
     try {
       const res = await fetch(getMatchStatsUrl, {
+=======
+import { env } from "process";
+import { useEffect } from "react";
+import RecentMatches from "~/components/RecentMatches";
+
+// const apiKey = env.FACEIT_API_KEY;
+const apiKey = "91243727-594b-4f9e-a208-65a9a3fcb656";
+const playerId = "3e1b338d-4650-456a-a4eb-b2730f350509";
+let matchStatsArray: any[] = [];
+
+const ProfilePage: NextPage<{ username: string; matchIds: [] }> = ({
+  username,
+  matchIds,
+}) => {
+  useEffect(() => {
+    getMatchStatsFromIds(matchIds);
+  }, []);
+
+  async function getMatchStatsFromIds(matchIds: string[]): Promise<void> {
+    const fetchPromises = matchIds.map((matchId) => {
+      const getMatchStatsUrl = `https://open.faceit.com/data/v4/matches/${matchId}/stats`;
+
+      return fetch(getMatchStatsUrl, {
+>>>>>>> c07e9c2e56c03ceed2796dba4960dae52c36d4f4
         headers: {
           Authorization: `Bearer ${apiKey}`,
           Accept: "application/json",
         },
+<<<<<<< HEAD
       });
 
       if (res.status === 200) {
@@ -65,6 +91,31 @@ const ProfilePage: NextPage<{ username: string; matchStatsArray: [] }> = ({
   username,
   matchStatsArray,
 }) => {
+=======
+      }).then((res) => {
+        if (res.status === 200) return res.json();
+        throw new Error("Failed to get match statistics");
+      });
+    });
+
+    const results = await Promise.allSettled(fetchPromises);
+
+    results.forEach((result) => {
+      if (result.status === "fulfilled") {
+        matchStatsArray.push(result.value);
+        if (matchStatsArray.length > 10) {
+          // If the array size exceeds 10, remove the oldest item
+          matchStatsArray.shift();
+        }
+      } else {
+        console.log(result.reason);
+      }
+    });
+  }
+
+  // end faceit api stuff
+
+>>>>>>> c07e9c2e56c03ceed2796dba4960dae52c36d4f4
   const { data } = api.profile.getUserByUsername.useQuery({
     username: username.replace(/"/g, ""), // Remove double quotes
   });
@@ -89,7 +140,11 @@ const ProfilePage: NextPage<{ username: string; matchStatsArray: [] }> = ({
             }'s profile picture`}
             width={128}
             height={128}
+<<<<<<< HEAD
             priority
+=======
+            priority={true}
+>>>>>>> c07e9c2e56c03ceed2796dba4960dae52c36d4f4
             unoptimized={true}
             className="absolute bottom-0 left-0 right-0 mx-auto -mb-[64px] rounded-full bg-background ring-4 ring-text"
           />
@@ -115,8 +170,20 @@ const ProfilePage: NextPage<{ username: string; matchStatsArray: [] }> = ({
 export async function getStaticProps(
   context: GetStaticPropsContext<{ slug: string }>
 ) {
+<<<<<<< HEAD
   const matchIds = await getMatchIds();
   const matchStatsArray = await getMatchStatsFromIds(matchIds);
+=======
+  const obtainMatchIdsUrl = `https://open.faceit.com/data/v4/players/${playerId}/history?game=csgo&offset=0&limit=10`;
+
+  const res = await fetch(obtainMatchIdsUrl, {
+    headers: {
+      Authorization: `Bearer ${apiKey}`,
+      Accept: "application/json",
+    },
+  });
+  const matchIds = await res.json();
+>>>>>>> c07e9c2e56c03ceed2796dba4960dae52c36d4f4
 
   const helpers = generateSSGHelper();
   const slug = context.params!.slug;
@@ -129,9 +196,15 @@ export async function getStaticProps(
     props: {
       trpcState: helpers.dehydrate(),
       username,
+<<<<<<< HEAD
       matchStatsArray,
     },
     revalidate: 30,
+=======
+      matchIds: matchIds.items.map((item: any) => item.match_id),
+    },
+    revalidate: 1,
+>>>>>>> c07e9c2e56c03ceed2796dba4960dae52c36d4f4
   };
 }
 

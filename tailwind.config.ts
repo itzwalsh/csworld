@@ -11,7 +11,10 @@ export default {
       sm: "640px",
       md: "768px",
       lg: "1024px",
+<<<<<<< HEAD
       xl: "1440px",
+=======
+>>>>>>> c07e9c2e56c03ceed2796dba4960dae52c36d4f4
     },
     extend: {
       colors: {

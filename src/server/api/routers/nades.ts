@@ -87,6 +87,7 @@ export const nadesRouter = createTRPCRouter({
         .then(addUserDataToNades)
     ),
 
+<<<<<<< HEAD
   getNadesByMap: publicProcedure
     .input(
       z.object({
@@ -105,17 +106,27 @@ export const nadesRouter = createTRPCRouter({
         .then(addUserDataToNades)
     ),
 
+=======
+>>>>>>> c07e9c2e56c03ceed2796dba4960dae52c36d4f4
   create: privateProcedure
     .input(
       z.object({
         game: z.string().min(1).max(15),
         map: z.string().min(1).max(15),
+<<<<<<< HEAD
         start: z.string().min(1).max(15),
         end: z.string().min(1).max(15),
         type: z.string(),
         team: z.string(),
         tick: z.string(),
         technique: z.string(),
+=======
+        type: z.string(),
+        tick: z.string(),
+        team: z.string(),
+        start: z.string().min(1).max(15),
+        end: z.string().min(1).max(15),
+>>>>>>> c07e9c2e56c03ceed2796dba4960dae52c36d4f4
         description: z.string().min(1).max(100),
         videoUrl: z
           .string()
@@ -132,12 +143,20 @@ export const nadesRouter = createTRPCRouter({
         data: {
           game: input.game,
           map: input.map,
+<<<<<<< HEAD
           start: input.start,
           end: input.end,
           type: input.type,
           team: input.team,
           tick: input.tick,
           technique: input.technique,
+=======
+          type: input.type,
+          tick: input.tick,
+          team: input.team,
+          start: input.start,
+          end: input.end,
+>>>>>>> c07e9c2e56c03ceed2796dba4960dae52c36d4f4
           description: input.description,
           videoUrl: input.videoUrl,
           authorId,

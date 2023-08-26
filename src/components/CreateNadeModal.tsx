@@ -19,11 +19,18 @@ import { useUser } from "@clerk/nextjs";
 
 export default function CreateNadeModal() {
   const { user } = useUser();
+<<<<<<< HEAD
   const ctx = api.useContext();
 
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const [videoUrl, setVideoUrl] = useState("");
+=======
+
+  const ctx = api.useContext();
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
+>>>>>>> c07e9c2e56c03ceed2796dba4960dae52c36d4f4
   const [nade, setNade] = useState({
     game: "",
     map: "",
@@ -32,10 +39,18 @@ export default function CreateNadeModal() {
     type: "",
     team: "",
     tick: "",
+<<<<<<< HEAD
     technique: "",
     description: "",
   });
 
+=======
+    description: "",
+  });
+
+  const [videoUrl, setVideoUrl] = useState("");
+
+>>>>>>> c07e9c2e56c03ceed2796dba4960dae52c36d4f4
   const handleChange = (e: any) => {
     const { name, value } = e.target;
 
@@ -59,7 +74,10 @@ export default function CreateNadeModal() {
         type: "",
         team: "",
         tick: "",
+<<<<<<< HEAD
         technique: "",
+=======
+>>>>>>> c07e9c2e56c03ceed2796dba4960dae52c36d4f4
         description: "",
       });
       setVideoUrl("");
@@ -322,6 +340,7 @@ export default function CreateNadeModal() {
                 </div>
               </div>
             </FormControl>
+<<<<<<< HEAD
 
             <FormControl isRequired pb={2}>
               <div className="flex gap-x-12">
@@ -460,6 +479,69 @@ export default function CreateNadeModal() {
               </div>
             </FormControl>
             <FormControl isRequired>
+=======
+            <FormControl isRequired>
+              <div className="w-48">
+                <FormLabel className="w-full">Tick Rate</FormLabel>
+
+                <div className="flex gap-x-1 pb-4">
+                  <input
+                    type="radio"
+                    required
+                    id="64tick"
+                    value="64"
+                    className="hidden"
+                    name="tick"
+                    checked={nade.tick === "64"}
+                    onChange={handleChange}
+                  />
+                  <label
+                    className="flex h-8 w-12 cursor-pointer items-center justify-center rounded-md rounded-r-none bg-zinc-800"
+                    htmlFor="64tick"
+                  >
+                    <p className="text-md inline font-semibold text-text">64</p>
+                  </label>
+
+                  <input
+                    type="radio"
+                    required
+                    id="bothtick"
+                    value="Both"
+                    className="hidden"
+                    name="tick"
+                    checked={nade.tick === "Both"}
+                    onChange={handleChange}
+                  />
+                  <label
+                    className="flex h-8 w-12 cursor-pointer items-center justify-center bg-zinc-800"
+                    htmlFor="bothtick"
+                  >
+                    <p className="text-md inline font-semibold text-text">
+                      Both
+                    </p>
+                  </label>
+
+                  <input
+                    type="radio"
+                    required
+                    id="128tick"
+                    value="128"
+                    className="hidden"
+                    name="tick"
+                    checked={nade.tick === "128"}
+                    onChange={handleChange}
+                  />
+                  <label
+                    className="flex h-8 w-12 cursor-pointer items-center justify-center rounded-md rounded-l-none bg-zinc-800"
+                    htmlFor="128tick"
+                  >
+                    <p className="text-md inline font-semibold text-text">
+                      128
+                    </p>
+                  </label>
+                </div>
+              </div>
+>>>>>>> c07e9c2e56c03ceed2796dba4960dae52c36d4f4
               <div className="flex flex-col gap-2">
                 <div className="inline">
                   <span>
@@ -475,6 +557,7 @@ export default function CreateNadeModal() {
                           e.preventDefault();
                           if (videoUrl !== "") {
                             mutate({
+<<<<<<< HEAD
                               game: "",
                               map: "",
                               start: "",
@@ -484,6 +567,16 @@ export default function CreateNadeModal() {
                               tick: "",
                               technique: "",
                               videoUrl: videoUrl,
+=======
+                              videoUrl: videoUrl,
+                              map: "",
+                              type: "",
+                              game: "",
+                              tick: "",
+                              team: "",
+                              start: "",
+                              end: "",
+>>>>>>> c07e9c2e56c03ceed2796dba4960dae52c36d4f4
                               description: "",
                             });
                           }

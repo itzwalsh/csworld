@@ -40,7 +40,11 @@ export default function Home() {
   return (
     <>
       <PageLayout>
+<<<<<<< HEAD
         <div className="h-screen overflow-visible">
+=======
+        <div className="">
+>>>>>>> c07e9c2e56c03ceed2796dba4960dae52c36d4f4
           {/* Hero section: Welcome to CS World */}
           <section className="flex flex-col items-center justify-center py-32">
             <div className="flex w-full flex-1 flex-col items-center justify-center px-20 text-center">
