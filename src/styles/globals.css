@@ -1,3 +1,16 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+    @apply bg-background text-text;
+}
+
+input[type="radio"]:checked+label {
+    @apply ring-2;
+    @apply ring-accent;
+}
+
+.submitnade {
+    @apply bg-accent;
+}
