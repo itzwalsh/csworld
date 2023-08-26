@@ -15,7 +15,6 @@ interface Props {
 }
 
 const MatchCard: FC<Props> = (props) => {
-  console.log(props.matchStatsArray[0]);
   return (
     <>
       {props.matchStatsArray?.slice(0, 3).map((match: any, i: number) => {
@@ -32,11 +31,8 @@ const MatchCard: FC<Props> = (props) => {
             const playerInTeam1 = team1.players.find(
               (player: any) => player.player_id === props.playerId
             );
-            if (playerInTeam1) {
-              return 0;
-            } else {
-              return 1;
-            }
+
+            return playerInTeam1 ? 0 : 1;
           }
 
           function findMyStats() {
@@ -64,15 +60,14 @@ const MatchCard: FC<Props> = (props) => {
             <Link
               href="/maps/matchId"
               className="text-text transition-all duration-200 hover:-translate-y-2"
+              key={i}
             >
-              <div
-                className="col-span-12 h-[250px] w-full min-w-[450px] max-w-[600px] sm:col-span-7"
-                key={i}
-              >
+              <div className="col-span-12 h-[250px] w-full min-w-[450px] max-w-[600px] sm:col-span-7">
                 <Image
                   src={mapImageName ?? "/mirage-background.png"}
                   alt="Map Image"
                   fill
+                  priority
                   className="relative rounded-md object-cover opacity-40"
                 />
                 <div className="absolute left-0 right-24 top-8 mx-auto w-72 rounded-md bg-zinc-950 py-3">

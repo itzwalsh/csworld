@@ -7,55 +7,64 @@ import { generateSSGHelper } from "~/server/helpers/serverSideHelper";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import Link from "next/link";
 import { PageLayout } from "~/components/layout";
-import { env } from "process";
-import { useEffect } from "react";
 import RecentMatches from "~/components/RecentMatches";
+import { env } from "process";
 
-// const apiKey = env.FACEIT_API_KEY;
 const apiKey = "91243727-594b-4f9e-a208-65a9a3fcb656";
 const playerId = "3e1b338d-4650-456a-a4eb-b2730f350509";
-let matchStatsArray: any[] = [];
 
-const ProfilePage: NextPage<{ username: string; matchIds: [] }> = ({
-  username,
-  matchIds,
-}) => {
-  useEffect(() => {
-    getMatchStatsFromIds(matchIds);
-  }, []);
+async function getMatchIds(): Promise<string[]> {
+  const getMatchIdsUrl = `https://open.faceit.com/data/v4/players/${playerId}/history?game=csgo&offset=0&limit=10`;
 
-  async function getMatchStatsFromIds(matchIds: string[]): Promise<void> {
-    const fetchPromises = matchIds.map((matchId) => {
-      const getMatchStatsUrl = `https://open.faceit.com/data/v4/matches/${matchId}/stats`;
+  const res = await fetch(getMatchIdsUrl, {
+    headers: {
+      Authorization: `Bearer ${apiKey}`,
+      Accept: "application/json",
+    },
+  });
 
-      return fetch(getMatchStatsUrl, {
+  if (res.status === 200) {
+    const data = await res.json();
+    const matchIds = data.items.map((item: any) => item.match_id);
+    return matchIds;
+  } else {
+    throw new Error("Failed to get match ids");
+  }
+}
+
+async function getMatchStatsFromIds(matchIds: string[]): Promise<any[]> {
+  const fetchPromises = matchIds.map(async (matchId) => {
+    const getMatchStatsUrl = `https://open.faceit.com/data/v4/matches/${matchId}/stats`;
+
+    try {
+      const res = await fetch(getMatchStatsUrl, {
         headers: {
           Authorization: `Bearer ${apiKey}`,
           Accept: "application/json",
         },
-      }).then((res) => {
-        if (res.status === 200) return res.json();
-        throw new Error("Failed to get match statistics");
       });
-    });
 
-    const results = await Promise.allSettled(fetchPromises);
-
-    results.forEach((result) => {
-      if (result.status === "fulfilled") {
-        matchStatsArray.push(result.value);
-        if (matchStatsArray.length > 10) {
-          // If the array size exceeds 10, remove the oldest item
-          matchStatsArray.shift();
-        }
+      if (res.status === 200) {
+        const matchStats = await res.json();
+        return matchStats;
       } else {
-        console.log(result.reason);
+        console.log("Failed to get match statistics for match ID:", matchId);
+        return null;
       }
-    });
-  }
+    } catch (error) {
+      console.log(error);
+      return null;
+    }
+  });
 
-  // end faceit api stuff
+  const matchStatsResults = await Promise.all(fetchPromises);
+  return matchStatsResults.filter((stats) => stats !== null);
+}
 
+const ProfilePage: NextPage<{ username: string; matchStatsArray: [] }> = ({
+  username,
+  matchStatsArray,
+}) => {
   const { data } = api.profile.getUserByUsername.useQuery({
     username: username.replace(/"/g, ""), // Remove double quotes
   });
@@ -80,7 +89,7 @@ const ProfilePage: NextPage<{ username: string; matchIds: [] }> = ({
             }'s profile picture`}
             width={128}
             height={128}
-            priority={true}
+            priority
             unoptimized={true}
             className="absolute bottom-0 left-0 right-0 mx-auto -mb-[64px] rounded-full bg-background ring-4 ring-text"
           />
@@ -106,15 +115,8 @@ const ProfilePage: NextPage<{ username: string; matchIds: [] }> = ({
 export async function getStaticProps(
   context: GetStaticPropsContext<{ slug: string }>
 ) {
-  const obtainMatchIdsUrl = `https://open.faceit.com/data/v4/players/${playerId}/history?game=csgo&offset=0&limit=10`;
-
-  const res = await fetch(obtainMatchIdsUrl, {
-    headers: {
-      Authorization: `Bearer ${apiKey}`,
-      Accept: "application/json",
-    },
-  });
-  const matchIds = await res.json();
+  const matchIds = await getMatchIds();
+  const matchStatsArray = await getMatchStatsFromIds(matchIds);
 
   const helpers = generateSSGHelper();
   const slug = context.params!.slug;
@@ -127,9 +129,9 @@ export async function getStaticProps(
     props: {
       trpcState: helpers.dehydrate(),
       username,
-      matchIds: matchIds.items.map((item: any) => item.match_id),
+      matchStatsArray,
     },
-    revalidate: 1,
+    revalidate: 30,
   };
 }
 

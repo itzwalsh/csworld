@@ -18,14 +18,15 @@ model Nade {
     updatedAt DateTime @updatedAt
     game      String
     map       String
-    type      String
-    tick      String
-    team      String
     start     String
     end       String
+    type      String
+    team      String
+    tick      String
+    technique   String
     description String
-    videoUrl     String
-    authorId  String
+    videoUrl    String
+    authorId    String
 
     @@index ([authorId])
 }

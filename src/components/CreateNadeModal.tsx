@@ -19,10 +19,11 @@ import { useUser } from "@clerk/nextjs";
 
 export default function CreateNadeModal() {
   const { user } = useUser();
-
   const ctx = api.useContext();
+
   const { isOpen, onOpen, onClose } = useDisclosure();
 
+  const [videoUrl, setVideoUrl] = useState("");
   const [nade, setNade] = useState({
     game: "",
     map: "",
@@ -31,10 +32,9 @@ export default function CreateNadeModal() {
     type: "",
     team: "",
     tick: "",
+    technique: "",
     description: "",
   });
-
-  const [videoUrl, setVideoUrl] = useState("");
 
   const handleChange = (e: any) => {
     const { name, value } = e.target;
@@ -59,6 +59,7 @@ export default function CreateNadeModal() {
         type: "",
         team: "",
         tick: "",
+        technique: "",
         description: "",
       });
       setVideoUrl("");
@@ -321,67 +322,144 @@ export default function CreateNadeModal() {
                 </div>
               </div>
             </FormControl>
-            <FormControl isRequired>
-              <div className="w-48">
-                <FormLabel className="w-full">Tick Rate</FormLabel>
 
-                <div className="flex gap-x-1 pb-4">
-                  <input
-                    type="radio"
-                    required
-                    id="64tick"
-                    value="64"
-                    className="hidden"
-                    name="tick"
-                    checked={nade.tick === "64"}
-                    onChange={handleChange}
-                  />
-                  <label
-                    className="flex h-8 w-12 cursor-pointer items-center justify-center rounded-md rounded-r-none bg-zinc-800"
-                    htmlFor="64tick"
-                  >
-                    <p className="text-md inline font-semibold text-text">64</p>
-                  </label>
+            <FormControl isRequired pb={2}>
+              <div className="flex gap-x-12">
+                <div>
+                  <FormLabel>Tick Rate</FormLabel>
+                  <div className="flex gap-x-1 pb-4">
+                    <input
+                      type="radio"
+                      required
+                      id="64tick"
+                      value="64"
+                      className="hidden"
+                      name="tick"
+                      checked={nade.tick === "64"}
+                      onChange={handleChange}
+                    />
+                    <label
+                      className="flex h-8 w-12 cursor-pointer items-center justify-center rounded-md rounded-r-none bg-zinc-800"
+                      htmlFor="64tick"
+                    >
+                      <p className="text-md inline font-semibold text-text">
+                        64
+                      </p>
+                    </label>
 
-                  <input
-                    type="radio"
-                    required
-                    id="bothtick"
-                    value="Both"
-                    className="hidden"
-                    name="tick"
-                    checked={nade.tick === "Both"}
-                    onChange={handleChange}
-                  />
-                  <label
-                    className="flex h-8 w-12 cursor-pointer items-center justify-center bg-zinc-800"
-                    htmlFor="bothtick"
-                  >
-                    <p className="text-md inline font-semibold text-text">
-                      Both
-                    </p>
-                  </label>
+                    <input
+                      type="radio"
+                      required
+                      id="bothtick"
+                      value="Both"
+                      className="hidden"
+                      name="tick"
+                      checked={nade.tick === "Both"}
+                      onChange={handleChange}
+                    />
+                    <label
+                      className="flex h-8 w-12 cursor-pointer items-center justify-center bg-zinc-800"
+                      htmlFor="bothtick"
+                    >
+                      <p className="text-md inline font-semibold text-text">
+                        Both
+                      </p>
+                    </label>
 
-                  <input
-                    type="radio"
-                    required
-                    id="128tick"
-                    value="128"
-                    className="hidden"
-                    name="tick"
-                    checked={nade.tick === "128"}
-                    onChange={handleChange}
-                  />
-                  <label
-                    className="flex h-8 w-12 cursor-pointer items-center justify-center rounded-md rounded-l-none bg-zinc-800"
-                    htmlFor="128tick"
-                  >
-                    <p className="text-md inline font-semibold text-text">
-                      128
-                    </p>
-                  </label>
+                    <input
+                      type="radio"
+                      required
+                      id="128tick"
+                      value="128"
+                      className="hidden"
+                      name="tick"
+                      checked={nade.tick === "128"}
+                      onChange={handleChange}
+                    />
+                    <label
+                      className="flex h-8 w-12 cursor-pointer items-center justify-center rounded-md rounded-l-none bg-zinc-800"
+                      htmlFor="128tick"
+                    >
+                      <p className="text-md inline font-semibold text-text">
+                        128
+                      </p>
+                    </label>
+                  </div>
+                </div>
+
+                {/* Technique */}
+                <div>
+                  <FormLabel>Technique</FormLabel>
+                  <div className="flex gap-x-6">
+                    <div className="flex gap-x-1">
+                      <input
+                        type="radio"
+                        required
+                        id="left-click"
+                        value="Left-Click"
+                        className="hidden"
+                        name="technique"
+                        checked={nade.technique === "Left-Click"}
+                        onChange={handleChange}
+                      />
+                      <label
+                        className="flex h-full w-full cursor-pointer items-center justify-center rounded-md rounded-r-none bg-zinc-800"
+                        htmlFor="left-click"
+                      >
+                        <img
+                          className="m-auto block aspect-square w-10"
+                          src="/leftclick.svg"
+                          alt="Left-Click"
+                        />
+                      </label>
+
+                      <input
+                        type="radio"
+                        required
+                        id="middle-click"
+                        value="Middle-Click"
+                        className="hidden"
+                        name="technique"
+                        checked={nade.technique === "Middle-Click"}
+                        onChange={handleChange}
+                      />
+                      <label
+                        className="flex h-full w-full cursor-pointer items-center justify-center rounded-md rounded-l-none rounded-r-none bg-zinc-800"
+                        htmlFor="middle-click"
+                      >
+                        <img
+                          className="m-auto block aspect-square w-10"
+                          src="/middleclick.svg"
+                          alt="Middle-Click"
+                        />
+                      </label>
+
+                      <input
+                        type="radio"
+                        required
+                        id="right-click"
+                        value="Right-Click"
+                        className="hidden"
+                        name="technique"
+                        checked={nade.technique === "Right-Click"}
+                        onChange={handleChange}
+                      />
+                      <label
+                        className="flex h-full w-full cursor-pointer items-center justify-center rounded-md rounded-l-none bg-zinc-800"
+                        htmlFor="right-click"
+                      >
+                        <img
+                          className="m-auto block aspect-square w-10"
+                          src="/rightclick.svg"
+                          alt="Right-Click"
+                        />
+                      </label>
+                    </div>
+                  </div>
                 </div>
               </div>
+            </FormControl>
+            <FormControl isRequired>
               <div className="flex flex-col gap-2">
                 <div className="inline">
                   <span>
@@ -397,14 +475,15 @@ export default function CreateNadeModal() {
                           e.preventDefault();
                           if (videoUrl !== "") {
                             mutate({
-                              videoUrl: videoUrl,
-                              map: "",
-                              type: "",
                               game: "",
-                              tick: "",
-                              team: "",
+                              map: "",
                               start: "",
                               end: "",
+                              type: "",
+                              team: "",
+                              tick: "",
+                              technique: "",
+                              videoUrl: videoUrl,
                               description: "",
                             });
                           }

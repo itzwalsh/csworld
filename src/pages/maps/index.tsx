@@ -6,18 +6,18 @@ import { listOfMaps } from "~/data/listOfMaps";
 const Maps = () => {
   return (
     <PageLayout>
-      <div className="px-8 py-4 md:mx-16">
+      <div className="h-fit px-8 py-4 md:mx-16 xl:h-screen">
         <div className="flex justify-end">
           <CreateNadeModal />
         </div>
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+        <div className="mt-2 grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
           {listOfMaps.map((mapitem) => {
             const { id } = mapitem;
             return (
               <a
                 href={`/maps` + mapitem.path}
                 key={id}
-                className="group my-2 flex flex-col justify-between rounded-lg transition-all duration-200 hover:opacity-50"
+                className="group my-2 flex flex-col justify-between rounded-lg transition-all duration-200 hover:-translate-y-2 hover:opacity-50"
               >
                 <img
                   src={mapitem.background}

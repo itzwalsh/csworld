@@ -14,7 +14,10 @@ const NadeCard = (props: UserNades) => {
   const nadeImage = getThumbnail(`${nade?.videoUrl}/0.jpg`);
 
   return (
-    <Link href="/maps/nadeId" className="hover:opacity-50">
+    <Link
+      href={`/maps/${nade.map.toLowerCase()}/${nade.id}`}
+      className="hover:opacity-50"
+    >
       <Card
         isFooterBlurred
         className="col-span-12 h-[250px] w-full min-w-[450px] max-w-[500px] sm:col-span-7"
@@ -46,7 +49,6 @@ const NadeCard = (props: UserNades) => {
               </p>
             </div>
           </div>
-          {/* Eventually pass the proper nade id to the top viewed nades */}
           <Button radius="full" size="sm">
             <p className="px-1">View Nade &rarr;</p>
           </Button>

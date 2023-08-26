@@ -87,16 +87,35 @@ export const nadesRouter = createTRPCRouter({
         .then(addUserDataToNades)
     ),
 
+  getNadesByMap: publicProcedure
+    .input(
+      z.object({
+        map: z.string(),
+      })
+    )
+    .query(({ ctx, input }) =>
+      ctx.prisma.nade
+        .findMany({
+          where: {
+            map: input.map,
+          },
+          take: 100,
+          orderBy: [{ createdAt: "desc" }],
+        })
+        .then(addUserDataToNades)
+    ),
+
   create: privateProcedure
     .input(
       z.object({
         game: z.string().min(1).max(15),
         map: z.string().min(1).max(15),
-        type: z.string(),
-        tick: z.string(),
-        team: z.string(),
         start: z.string().min(1).max(15),
         end: z.string().min(1).max(15),
+        type: z.string(),
+        team: z.string(),
+        tick: z.string(),
+        technique: z.string(),
         description: z.string().min(1).max(100),
         videoUrl: z
           .string()
@@ -113,11 +132,12 @@ export const nadesRouter = createTRPCRouter({
         data: {
           game: input.game,
           map: input.map,
-          type: input.type,
-          tick: input.tick,
-          team: input.team,
           start: input.start,
           end: input.end,
+          type: input.type,
+          team: input.team,
+          tick: input.tick,
+          technique: input.technique,
           description: input.description,
           videoUrl: input.videoUrl,
           authorId,
