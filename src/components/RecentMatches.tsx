@@ -15,10 +15,6 @@ interface Props {
 }
 
 const MatchCard: FC<Props> = (props) => {
-<<<<<<< HEAD
-=======
-  console.log(props.matchStatsArray[0]);
->>>>>>> c07e9c2e56c03ceed2796dba4960dae52c36d4f4
   return (
     <>
       {props.matchStatsArray?.slice(0, 3).map((match: any, i: number) => {
@@ -35,16 +31,8 @@ const MatchCard: FC<Props> = (props) => {
             const playerInTeam1 = team1.players.find(
               (player: any) => player.player_id === props.playerId
             );
-<<<<<<< HEAD
 
             return playerInTeam1 ? 0 : 1;
-=======
-            if (playerInTeam1) {
-              return 0;
-            } else {
-              return 1;
-            }
->>>>>>> c07e9c2e56c03ceed2796dba4960dae52c36d4f4
           }
 
           function findMyStats() {
@@ -72,25 +60,14 @@ const MatchCard: FC<Props> = (props) => {
             <Link
               href="/maps/matchId"
               className="text-text transition-all duration-200 hover:-translate-y-2"
-<<<<<<< HEAD
               key={i}
             >
               <div className="col-span-12 h-[250px] w-full min-w-[450px] max-w-[600px] sm:col-span-7">
-=======
-            >
-              <div
-                className="col-span-12 h-[250px] w-full min-w-[450px] max-w-[600px] sm:col-span-7"
-                key={i}
-              >
->>>>>>> c07e9c2e56c03ceed2796dba4960dae52c36d4f4
                 <Image
                   src={mapImageName ?? "/mirage-background.png"}
                   alt="Map Image"
                   fill
-<<<<<<< HEAD
                   priority
-=======
->>>>>>> c07e9c2e56c03ceed2796dba4960dae52c36d4f4
                   className="relative rounded-md object-cover opacity-40"
                 />
                 <div className="absolute left-0 right-24 top-8 mx-auto w-72 rounded-md bg-zinc-950 py-3">

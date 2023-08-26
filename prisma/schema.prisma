@@ -18,7 +18,6 @@ model Nade {
     updatedAt DateTime @updatedAt
     game      String
     map       String
-<<<<<<< HEAD
     start     String
     end       String
     type      String
@@ -28,16 +27,6 @@ model Nade {
     description String
     videoUrl    String
     authorId    String
-=======
-    type      String
-    tick      String
-    team      String
-    start     String
-    end       String
-    description String
-    videoUrl     String
-    authorId  String
->>>>>>> c07e9c2e56c03ceed2796dba4960dae52c36d4f4
 
     @@index ([authorId])
 }
