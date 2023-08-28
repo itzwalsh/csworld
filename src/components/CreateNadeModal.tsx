@@ -403,11 +403,11 @@ export default function CreateNadeModal() {
                         onChange={handleChange}
                       />
                       <label
-                        className="flex h-10 w-full cursor-pointer items-center justify-center rounded-md rounded-r-none bg-zinc-800"
+                        className="flex h-full w-full cursor-pointer items-center justify-center rounded-md rounded-r-none bg-zinc-800"
                         htmlFor="left-click"
                       >
                         <img
-                          className="mb-2 w-10"
+                          className="m-1 h-8 w-8"
                           src="/leftclick.svg"
                           alt="Left-Click"
                         />
@@ -424,11 +424,11 @@ export default function CreateNadeModal() {
                         onChange={handleChange}
                       />
                       <label
-                        className="flex h-10 w-full cursor-pointer items-center justify-center rounded-md rounded-l-none rounded-r-none bg-zinc-800"
+                        className="flex h-full w-full cursor-pointer items-center justify-center rounded-md rounded-l-none rounded-r-none bg-zinc-800"
                         htmlFor="middle-click"
                       >
                         <img
-                          className="mb-2 w-10"
+                          className="m-1 h-8 w-8"
                           src="/middleclick.svg"
                           alt="Middle-Click"
                         />
@@ -445,11 +445,11 @@ export default function CreateNadeModal() {
                         onChange={handleChange}
                       />
                       <label
-                        className="flex h-10 w-full cursor-pointer items-center justify-center rounded-md rounded-l-none bg-zinc-800"
+                        className="flex h-full w-full cursor-pointer items-center justify-center rounded-md rounded-l-none bg-zinc-800"
                         htmlFor="right-click"
                       >
                         <img
-                          className="mb-2 w-10"
+                          className="m-1 h-8 w-8"
                           src="/rightclick.svg"
                           alt="Right-Click"
                         />

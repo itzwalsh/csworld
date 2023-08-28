@@ -18,5 +18,6 @@ export const getEmbedLink = (videoUrl: string) => {
     return "";
   }
   url = videoUrl.replace("watch?v=", "embed/");
+
   return url;
 };

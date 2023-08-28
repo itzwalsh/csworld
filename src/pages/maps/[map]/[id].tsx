@@ -67,17 +67,17 @@ const SingleNadePage: NextPage<{ id: string }> = ({ id }) => {
             <IoMdArrowRoundBack className="m-3 inline-block text-3xl" />
           </Link>
 
-          <div className="my-4 flex flex-col">
-            <div className="mx-auto flex w-[500px] justify-around bg-zinc-950 py-2 md:w-[800px] md:rounded-t-lg lg:w-[1000px]">
+          <div className="flex min-h-screen flex-col md:text-xl">
+            <div className="mx-auto flex w-[500px] justify-around border-x-2 border-t-2 bg-zinc-950 py-2 md:w-[750px] md:rounded-t-lg lg:w-[1000px] xl:w-[1250px]">
               <div className="flex flex-col text-center">
-                <h1>Game</h1>
-                <p className="font-medium">{data.nade.game}</p>
+                <h1 className="font-medium">Game</h1>
+                <p>{data.nade.game}</p>
               </div>
               <div className="flex flex-col text-center">
-                <h1>Map</h1>
-                <p className="font-medium">{data.nade.map}</p>
+                <h1 className="font-medium">Map</h1>
+                <p>{data.nade.map}</p>
               </div>
-              <div className="flex flex-col text-center">
+              <div className="flex flex-col text-center font-medium">
                 Type
                 <Image
                   src={getNadeImage(data.nade.type)}
@@ -88,7 +88,7 @@ const SingleNadePage: NextPage<{ id: string }> = ({ id }) => {
                   height={48}
                 />
               </div>
-              <div className="flex flex-col text-center">
+              <div className="flex flex-col text-center font-medium">
                 Side
                 <Image
                   src={getNadeSide(data.nade.type)}
@@ -99,7 +99,7 @@ const SingleNadePage: NextPage<{ id: string }> = ({ id }) => {
                   height={48}
                 />
               </div>
-              <div className="flex flex-col text-center">
+              <div className="flex flex-col text-center font-medium">
                 <h1>Technique</h1>
                 <Image
                   src={getNadeTechnique(data.nade.technique)}
@@ -114,15 +114,15 @@ const SingleNadePage: NextPage<{ id: string }> = ({ id }) => {
             <Iframe
               url={nadeUrl}
               id="nadeVideo"
-              className="mx-auto aspect-video w-[500px] md:w-[800px] lg:w-[1000px]"
+              className="mx-auto aspect-video w-[500px] border-x-2 md:w-[750px] lg:w-[1000px] xl:w-[1250px]"
               display="block"
               position="relative"
             />
-            <div className="mx-auto flex w-[500px] justify-evenly bg-zinc-950 py-2 md:w-[800px] md:rounded-b-md lg:w-[1000px]">
+            <div className="mx-auto flex w-[500px] justify-evenly border-x-2 border-b-2 bg-zinc-950 py-2 md:w-[750px] md:rounded-b-md lg:w-[1000px] xl:w-[1250px]">
               <div className="mx-auto flex w-11/12 flex-col">
-                <h1>Description</h1>
-                <div className=" border border-gray-300/40"></div>
-                <p className="font-medium">{data.nade.description}</p>
+                <h1 className="font-medium">Description</h1>
+                <div className="border border-gray-300/20"></div>
+                <p className="">{data.nade.description}</p>
               </div>
             </div>
           </div>

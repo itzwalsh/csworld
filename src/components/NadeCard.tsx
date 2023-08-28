@@ -43,7 +43,7 @@ const NadeCard = (props: UserNades) => {
               <p className="text-tiny text-white">
                 {`${nade.end} ${nade.type} from ${nade.start}`}
               </p>
-              <p className="text-tiny text-white">
+              <p className="text-left text-tiny text-white">
                 {nade?.description ??
                   "A brief description of the nade that is being shown."}
               </p>

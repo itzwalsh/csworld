@@ -52,26 +52,34 @@ const MapPage: NextPage<{ mapData: MapInterface; hasError: boolean }> = ({
         <title>{`CS World - ${mapData.name}`}</title>
       </Head>
       <PageLayout>
-        {/* <MapNadesView /> */}
-        <div className="relative h-36 w-full">
+        <div className="relative min-h-screen w-full">
           <Link href="/maps" className="absolute z-10">
             <IoMdArrowRoundBack className="m-3 text-3xl" />
           </Link>
-          <Image
-            src={mapData.background}
-            alt="Map Background"
-            fill
-            priority
-            className="absolute object-cover opacity-20"
-          />
-          <h1 className="flex h-full items-center justify-center text-4xl">
-            {mapData.name}
-          </h1>
-        </div>
-        <div className="mt-14 flex w-full flex-1 flex-col items-center justify-center gap-4 p-8 text-center md:flex-row md:flex-wrap">
-          {data?.map((mapNades) => (
-            <NadeCard {...mapNades} key={mapNades.nade.id} />
-          )) ?? <LoadingSpinner size={36} />}
+          <div className="pointer-events-none flex select-none flex-col items-center justify-center gap-2">
+            <Image
+              src={mapData.background}
+              alt="Map Background"
+              fill
+              priority
+              className="pointer-events-none absolute select-none object-cover opacity-20"
+            />
+            <Image
+              src={mapData.logo}
+              alt="Map Logo"
+              width={72}
+              height={72}
+              className="mt-4"
+              priority
+            />
+            <h1 className="select-none text-4xl">{mapData.name}</h1>
+          </div>
+
+          <div className="flex w-full flex-1 flex-col items-center justify-center gap-4 py-12 text-center md:flex-row md:flex-wrap">
+            {data?.map((mapNades) => (
+              <NadeCard {...mapNades} key={mapNades.nade.id} />
+            )) ?? <LoadingSpinner size={36} />}
+          </div>
         </div>
       </PageLayout>
     </>

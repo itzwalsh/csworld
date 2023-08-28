@@ -50,7 +50,7 @@ export const listOfMaps = [
   },
   {
     id: 8,
-    name: "Dust 2",
+    name: "Dust2",
     path: "/dust2",
     background: "/dust2-background.png",
     logo: "/dust2-logo.png",
