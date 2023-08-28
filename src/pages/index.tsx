@@ -21,7 +21,7 @@ function RecentNades() {
 
   /* User's most viewed nades */
   return (
-    <section className="flex flex-col items-center justify-center gap-8 py-2 md:py-4 lg:py-8">
+    <section className="flex flex-col items-center justify-center gap-8 py-2 md:py-8">
       <h1 className="flex w-full items-center justify-center text-3xl font-bold">
         Recently added nades
       </h1>
@@ -42,20 +42,20 @@ export default function Home() {
       <PageLayout>
         <div className="h-full min-h-screen">
           {/* Hero section: Welcome to CS World */}
-          <section className="flex flex-col items-center justify-center py-16 md:py-24">
-            <div className="flex w-full flex-1 flex-col items-center justify-center px-20 text-center">
+          <section className="flex flex-col items-center justify-center py-8 md:py-24">
+            <div className="flex w-full flex-1 flex-col items-center justify-center gap-12 px-20 text-center">
               <h1 className="w-full text-4xl font-bold md:text-6xl">
                 Welcome to <a className="text-accent">CS World!</a>
               </h1>
-              <p className="mt-3 text-lg md:text-2xl">
+              <p className="text-lg md:text-2xl">
                 {isSignedIn
                   ? "Get started by adding your first nade"
                   : "Sign in to get started!"}
               </p>
               {isSignedIn && (
-                <div className="mt-6 flex max-w-4xl flex-wrap items-center justify-around">
+                <div className="flex max-w-4xl flex-wrap items-center justify-around">
                   <Link color="foreground" href="/maps" size="md">
-                    <button className="group mt-6 w-48 rounded-xl border-2 bg-accent p-4 transition-all duration-200 hover:border-2 hover:border-accent hover:bg-text">
+                    <button className="group w-48 rounded-xl border-2 bg-accent p-4 transition-all duration-200 hover:border-2 hover:border-accent hover:bg-text">
                       <h3 className="text-2xl font-bold group-hover:text-accent">
                         Create &rarr;
                       </h3>

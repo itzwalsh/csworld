@@ -122,7 +122,7 @@ const SingleNadePage: NextPage<{ id: string }> = ({ id }) => {
               <div className="mx-auto flex w-11/12 flex-col">
                 <h1 className="font-medium">Description</h1>
                 <div className="border border-gray-300/20"></div>
-                <p className="">{data.nade.description}</p>
+                <p className="py-2 md:py-4">{data.nade.description}</p>
               </div>
             </div>
           </div>

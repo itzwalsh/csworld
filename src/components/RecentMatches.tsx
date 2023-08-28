@@ -59,7 +59,7 @@ const MatchCard: FC<Props> = (props) => {
               className="text-text transition-all duration-200 hover:-translate-y-2"
               key={i}
             >
-              <div className="col-span-12 h-[250px] w-full min-w-[450px] max-w-[600px] sm:col-span-7">
+              <div className="col-span-12 h-[250px] w-[350px] min-w-[350px] max-w-[600px] sm:col-span-7 md:w-[450px]">
                 <Image
                   src={mapImageName ?? "/mirage-background.png"}
                   alt="Map Image"
@@ -67,7 +67,7 @@ const MatchCard: FC<Props> = (props) => {
                   priority
                   className="relative rounded-md object-cover opacity-40"
                 />
-                <div className="absolute left-0 right-24 top-8 mx-auto w-72 rounded-md bg-zinc-950 py-3">
+                <div className="absolute left-0 right-8 top-8 mx-auto w-72 rounded-md bg-zinc-950 py-3 md:right-24">
                   <span className="text-2xl font-bold uppercase">
                     {match.rounds[0].teams[findMyTeam()].team_stats[
                       "Team Win"

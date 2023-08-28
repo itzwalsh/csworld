@@ -20,7 +20,7 @@ const NadeCard = (props: UserNades) => {
     >
       <Card
         isFooterBlurred
-        className="col-span-12 h-[250px] w-full min-w-[450px] max-w-[500px] sm:col-span-7"
+        className="col-span-12 h-[200px] w-[350px] min-w-[350px] max-w-[500px] sm:col-span-7 md:h-[250px] md:w-[450px]"
         key={nade?.id}
       >
         <Image
@@ -40,18 +40,15 @@ const NadeCard = (props: UserNades) => {
               }
             />
             <div className="flex flex-col items-start">
-              <p className="text-tiny text-white">
+              <p className="w-[375px] overflow-hidden text-ellipsis whitespace-nowrap text-left text-tiny text-white md:text-sm">
                 {`${nade.end} ${nade.type} from ${nade.start}`}
               </p>
-              <p className="text-left text-tiny text-white">
+              <p className="w-[375px] overflow-hidden text-ellipsis whitespace-nowrap text-left text-tiny text-white md:text-sm">
                 {nade?.description ??
                   "A brief description of the nade that is being shown."}
               </p>
             </div>
           </div>
-          <Button radius="full" size="sm">
-            <p className="px-1">View Nade &rarr;</p>
-          </Button>
         </CardFooter>
       </Card>
     </Link>
