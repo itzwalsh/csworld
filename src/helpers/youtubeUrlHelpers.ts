@@ -11,3 +11,12 @@ export const getThumbnail = (videoUrl: string) => {
 
   return getThumb(videoUrl);
 };
+
+export const getEmbedLink = (videoUrl: string) => {
+  let url;
+  if (url === null) {
+    return "";
+  }
+  url = videoUrl.replace("watch?v=", "embed/");
+  return url;
+};

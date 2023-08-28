@@ -21,7 +21,7 @@ function RecentNades() {
 
   /* User's most viewed nades */
   return (
-    <section className="flex flex-col items-center justify-center gap-8 py-2">
+    <section className="flex flex-col items-center justify-center gap-8 py-2 md:py-4 lg:py-8">
       <h1 className="flex w-full items-center justify-center text-3xl font-bold">
         Recently added nades
       </h1>
@@ -40,9 +40,9 @@ export default function Home() {
   return (
     <>
       <PageLayout>
-        <div className="h-screen overflow-visible">
+        <div className="h-full min-h-screen">
           {/* Hero section: Welcome to CS World */}
-          <section className="flex flex-col items-center justify-center py-32">
+          <section className="flex flex-col items-center justify-center py-16 md:py-24">
             <div className="flex w-full flex-1 flex-col items-center justify-center px-20 text-center">
               <h1 className="w-full text-4xl font-bold md:text-6xl">
                 Welcome to <a className="text-accent">CS World!</a>

@@ -5,7 +5,9 @@ import { PageLayout } from "~/components/layout";
 import { generateSSGHelper } from "~/server/helpers/serverSideHelper";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import Link from "next/link";
-import NadeCard from "~/components/NadeCard";
+import Iframe from "react-iframe";
+import { getEmbedLink } from "~/helpers/youtubeUrlHelpers";
+import Image from "next/image";
 
 const SingleNadePage: NextPage<{ id: string }> = ({ id }) => {
   const { data } = api.nades.getById.useQuery({
@@ -14,16 +16,117 @@ const SingleNadePage: NextPage<{ id: string }> = ({ id }) => {
 
   if (!data) return <div>404 Not Found</div>;
 
+  const nadeUrl = getEmbedLink(data.nade.videoUrl);
+
+  function getNadeImage(nadeType: string) {
+    switch (nadeType) {
+      case "Smoke":
+        return "/smoke-logo.webp";
+      case "Flash":
+        return "/flash-logo.webp";
+      case "Molotov":
+        return "/molly-logo.webp";
+      case "Nade":
+        return "/grenade-logo.webp";
+      default:
+        return "/smoke-logo.webp";
+    }
+  }
+  function getNadeSide(nadeSide: string) {
+    switch (nadeSide) {
+      case "Terrorist":
+        return "/t-logo.webp";
+      case "Counter-Terrorist":
+        return "/ct-logo.webp";
+      case "Both":
+        return "/t-ct-logo.webp";
+      default:
+        return "/t-ct-logo.webp";
+    }
+  }
+  function getNadeTechnique(nadeTech: string) {
+    switch (nadeTech) {
+      case "Left-Click":
+        return "/leftclick.svg";
+      case "Right-Click":
+        return "/rightclick.svg";
+      case "Middle-Click":
+        return "/middleclick.svg";
+      default:
+        return "/leftclick.svg";
+    }
+  }
   return (
     <>
       <Head>
-        <title>{`${data.nade.start} - ${data.author.username}`}</title>
+        <title>{`${data.nade.end} from ${data.nade.start}`}</title>
       </Head>
       <PageLayout>
-        <Link href={`/maps/${data.nade.map.toLowerCase()}`}>
-          <IoMdArrowRoundBack className="m-3 text-3xl" />
-        </Link>
-        <NadeCard {...data} />
+        <div className="relative left-0 right-0 mx-auto w-full">
+          <Link href={`/maps/${data.nade.map.toLowerCase()}`}>
+            <IoMdArrowRoundBack className="m-3 inline-block text-3xl" />
+          </Link>
+
+          <div className="my-4 flex flex-col">
+            <div className="mx-auto flex w-[500px] justify-around bg-zinc-950 py-2 md:w-[800px] md:rounded-t-lg lg:w-[1000px]">
+              <div className="flex flex-col text-center">
+                <h1>Game</h1>
+                <p className="font-medium">{data.nade.game}</p>
+              </div>
+              <div className="flex flex-col text-center">
+                <h1>Map</h1>
+                <p className="font-medium">{data.nade.map}</p>
+              </div>
+              <div className="flex flex-col text-center">
+                Type
+                <Image
+                  src={getNadeImage(data.nade.type)}
+                  alt="Nade Type"
+                  priority
+                  className="mx-auto inline-block h-6 w-8"
+                  width={48}
+                  height={48}
+                />
+              </div>
+              <div className="flex flex-col text-center">
+                Side
+                <Image
+                  src={getNadeSide(data.nade.type)}
+                  alt="Nade Side"
+                  priority
+                  className="mx-auto inline-block h-6 w-6"
+                  width={48}
+                  height={48}
+                />
+              </div>
+              <div className="flex flex-col text-center">
+                <h1>Technique</h1>
+                <Image
+                  src={getNadeTechnique(data.nade.technique)}
+                  alt="Nade Side"
+                  priority
+                  className="mx-auto inline-block h-6 w-6"
+                  width={48}
+                  height={48}
+                />
+              </div>
+            </div>
+            <Iframe
+              url={nadeUrl}
+              id="nadeVideo"
+              className="mx-auto aspect-video w-[500px] md:w-[800px] lg:w-[1000px]"
+              display="block"
+              position="relative"
+            />
+            <div className="mx-auto flex w-[500px] justify-evenly bg-zinc-950 py-2 md:w-[800px] md:rounded-b-md lg:w-[1000px]">
+              <div className="mx-auto flex w-11/12 flex-col">
+                <h1>Description</h1>
+                <div className=" border border-gray-300/40"></div>
+                <p className="font-medium">{data.nade.description}</p>
+              </div>
+            </div>
+          </div>
+        </div>
       </PageLayout>
     </>
   );

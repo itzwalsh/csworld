@@ -4,12 +4,12 @@ import Image from "next/image";
 import { type RouterOutputs } from "~/utils/api";
 import { listOfMaps } from "~/data/listOfMaps";
 import Nav from "~/components/Nav";
-import { getThumbnail } from "~/helpers/findVideoUrlThumbnail";
+import { getThumbnail } from "~/helpers/youtubeUrlHelpers";
 
 type UserNades = RouterOutputs["nades"]["getAll"][number];
 
 const NadeCard = (props: UserNades) => {
-  const { nade, author } = props;
+  const { nade } = props;
 
   const nadeImage = getThumbnail(`${nade?.videoUrl}/0.jpg`);
 
@@ -41,11 +41,11 @@ const NadeCard = (props: UserNades) => {
             />
             <div className="flex flex-col items-start">
               <p className="text-tiny text-white">
-                {nade?.start ?? "A title for the nade that is being shown."}
+                {`${nade.end} ${nade.type} from ${nade.start}`}
               </p>
               <p className="text-tiny text-white">
                 {nade?.description ??
-                  "A brief description of the is being shown."}
+                  "A brief description of the nade that is being shown."}
               </p>
             </div>
           </div>

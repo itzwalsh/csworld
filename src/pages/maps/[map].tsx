@@ -53,7 +53,7 @@ const MapPage: NextPage<{ mapData: MapInterface; hasError: boolean }> = ({
       </Head>
       <PageLayout>
         {/* <MapNadesView /> */}
-        <div className="relative h-32 w-full">
+        <div className="relative h-36 w-full">
           <Link href="/maps" className="absolute z-10">
             <IoMdArrowRoundBack className="m-3 text-3xl" />
           </Link>
@@ -64,11 +64,11 @@ const MapPage: NextPage<{ mapData: MapInterface; hasError: boolean }> = ({
             priority
             className="absolute object-cover opacity-20"
           />
-          <h1 className="flex h-full items-center justify-center text-3xl">
+          <h1 className="flex h-full items-center justify-center text-4xl">
             {mapData.name}
           </h1>
         </div>
-        <div className="flex w-full flex-1 flex-col items-center justify-center gap-4 px-20 text-center md:flex-row md:flex-wrap">
+        <div className="mt-14 flex w-full flex-1 flex-col items-center justify-center gap-4 p-8 text-center md:flex-row md:flex-wrap">
           {data?.map((mapNades) => (
             <NadeCard {...mapNades} key={mapNades.nade.id} />
           )) ?? <LoadingSpinner size={36} />}

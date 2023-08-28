@@ -3,9 +3,6 @@ import { LoadingPage, LoadingSpinner } from "./loading";
 
 import { Link, Button, Card, CardFooter } from "@nextui-org/react";
 import Image from "next/image";
-import { type RouterOutputs } from "~/utils/api";
-import { listOfMaps } from "~/data/listOfMaps";
-import { getThumbnail } from "~/helpers/findVideoUrlThumbnail";
 import { IoPerson, IoSkull } from "react-icons/io5";
 import { AiOutlinePercentage } from "react-icons/ai";
 
