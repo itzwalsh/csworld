@@ -32,6 +32,7 @@ interface Props {
       }>;
     }>;
   }> | null;
+<<<<<<< HEAD
 }
 
 interface PlayerInterface {
@@ -43,6 +44,8 @@ interface PlayerInterface {
     "K/D Ratio": string;
     "Headshots %": string;
   };
+=======
+>>>>>>> d69f45e2cdad59cd72feba9cbcbc6dfbfd149eb0
 }
 
 const MatchCard: FC<Props> = (props) => {
@@ -60,7 +63,11 @@ const MatchCard: FC<Props> = (props) => {
             // const team2 = match.rounds[0].teams[1];
 
             const playerInTeam1 = team1?.players.find(
+<<<<<<< HEAD
               (player: PlayerInterface) => player.player_id === props.playerId
+=======
+              (player: any) => player.player_id === props.playerId
+>>>>>>> d69f45e2cdad59cd72feba9cbcbc6dfbfd149eb0
             );
 
             return playerInTeam1 ? 0 : 1;
