@@ -1,6 +1,11 @@
 import Head from "next/head";
 import { api } from "~/utils/api";
-import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
+import type {
+  GetStaticPaths,
+  GetStaticProps,
+  GetStaticPropsContext,
+  NextPage,
+} from "next";
 import { PageLayout } from "~/components/layout";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import Link from "next/link";
@@ -88,7 +93,7 @@ const MapPage: NextPage<{ mapData: MapInterface; hasError: boolean }> = ({
   );
 };
 
-export const getStaticProps: GetStaticProps = async (context) => {
+export function getStaticProps(context: GetStaticPropsContext) {
   const mapName = context.params?.map;
 
   const data = getMapData();
@@ -108,9 +113,9 @@ export const getStaticProps: GetStaticProps = async (context) => {
       mapData: foundMap,
     },
   };
-};
+}
 
-export const getStaticPaths: GetStaticPaths = async () => {
+export function getStaticPaths() {
   const data = getMapData();
   const pathsWithParams = data.map((map: MapInterface) => ({
     params: { map: map.name.toLowerCase() },
@@ -120,6 +125,6 @@ export const getStaticPaths: GetStaticPaths = async () => {
     paths: pathsWithParams,
     fallback: true,
   };
-};
+}
 
 export default MapPage;
