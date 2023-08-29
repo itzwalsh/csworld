@@ -1,8 +1,6 @@
 import { useUser } from "@clerk/nextjs";
 import { Link } from "@nextui-org/react";
-import { env } from "process";
 import NadeCard from "~/components/NadeCard";
-import Nav from "~/components/Nav";
 import { PageLayout } from "~/components/layout";
 import { LoadingPage } from "~/components/loading";
 import { api } from "~/utils/api";

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { FormEvent, useState } from "react";
 import {
   Modal,
   ModalOverlay,
@@ -16,6 +16,7 @@ import {
 import { toast } from "react-hot-toast";
 import { api } from "~/utils/api";
 import { useUser } from "@clerk/nextjs";
+import Image from "next/image";
 
 export default function CreateNadeModal() {
   const { user } = useUser();
@@ -36,8 +37,8 @@ export default function CreateNadeModal() {
     description: "",
   });
 
-  const handleChange = (e: any) => {
-    const { name, value } = e.target;
+  const handleChange = (e: FormEvent<HTMLElement>) => {
+    const { name, value } = e.target as HTMLInputElement | HTMLSelectElement;
 
     setNade((prevState) => ({
       ...prevState,
@@ -194,7 +195,12 @@ export default function CreateNadeModal() {
                         className="flex aspect-square w-10 cursor-pointer items-center justify-center rounded-md rounded-r-none bg-zinc-800"
                         htmlFor="Smoke"
                       >
-                        <img src="/smoke-logo.webp" alt="Smoke" />
+                        <Image
+                          width={500}
+                          height={500}
+                          src="/smoke-logo.webp"
+                          alt="Smoke"
+                        />
                       </label>
 
                       <input
@@ -211,7 +217,9 @@ export default function CreateNadeModal() {
                         className="flex aspect-square w-10 cursor-pointer items-center justify-center rounded-md rounded-l-none rounded-r-none bg-zinc-800"
                         htmlFor="Flash"
                       >
-                        <img
+                        <Image
+                          width={500}
+                          height={500}
                           src="/flash-logo.webp"
                           alt="Flash"
                           className="mr-0.5 scale-90" //idk why this needs a margin-right
@@ -232,7 +240,9 @@ export default function CreateNadeModal() {
                         className="flex aspect-square w-10 cursor-pointer items-center justify-center rounded-md rounded-l-none rounded-r-none bg-zinc-800"
                         htmlFor="Nade"
                       >
-                        <img
+                        <Image
+                          width={500}
+                          height={500}
                           src="/grenade-logo.webp"
                           alt="Nade"
                           className="scale-125"
@@ -253,7 +263,9 @@ export default function CreateNadeModal() {
                         className="flex aspect-square w-10 cursor-pointer items-center justify-center rounded-md rounded-l-none bg-zinc-800"
                         htmlFor="Molotov"
                       >
-                        <img
+                        <Image
+                          width={500}
+                          height={500}
                           src="/molly-logo.webp"
                           alt="Molotov"
                           className="scale-125"
@@ -281,7 +293,12 @@ export default function CreateNadeModal() {
                         className="flex aspect-square w-10 cursor-pointer items-center justify-center rounded-md rounded-r-none bg-zinc-800 p-1"
                         htmlFor="t-side"
                       >
-                        <img src="/t-logo.webp" alt="Terrorist" />
+                        <Image
+                          width={500}
+                          height={500}
+                          src="/t-logo.webp"
+                          alt="Terrorist"
+                        />
                       </label>
 
                       <input
@@ -298,7 +315,12 @@ export default function CreateNadeModal() {
                         className="flex aspect-square w-10 cursor-pointer items-center justify-center rounded-md rounded-l-none rounded-r-none bg-zinc-800 p-1"
                         htmlFor="both"
                       >
-                        <img src="/t-ct-logo.webp" alt="Both" />
+                        <Image
+                          width={500}
+                          height={500}
+                          src="/t-ct-logo.webp"
+                          alt="Both"
+                        />
                       </label>
 
                       <input
@@ -315,7 +337,12 @@ export default function CreateNadeModal() {
                         className="flex aspect-square w-10 cursor-pointer items-center justify-center rounded-md rounded-l-none bg-zinc-800 p-1"
                         htmlFor="ct-side"
                       >
-                        <img src="/ct-logo.webp" alt="Counter-Terrorist" />
+                        <Image
+                          width={500}
+                          height={500}
+                          src="/ct-logo.webp"
+                          alt="Counter-Terrorist"
+                        />
                       </label>
                     </div>
                   </div>
@@ -406,7 +433,9 @@ export default function CreateNadeModal() {
                         className="flex h-full w-full cursor-pointer items-center justify-center rounded-md rounded-r-none bg-zinc-800"
                         htmlFor="left-click"
                       >
-                        <img
+                        <Image
+                          width={500}
+                          height={500}
                           className="m-1 h-8 w-8"
                           src="/leftclick.svg"
                           alt="Left-Click"
@@ -427,7 +456,9 @@ export default function CreateNadeModal() {
                         className="flex h-full w-full cursor-pointer items-center justify-center rounded-md rounded-l-none rounded-r-none bg-zinc-800"
                         htmlFor="middle-click"
                       >
-                        <img
+                        <Image
+                          width={500}
+                          height={500}
                           className="m-1 h-8 w-8"
                           src="/middleclick.svg"
                           alt="Middle-Click"
@@ -448,7 +479,9 @@ export default function CreateNadeModal() {
                         className="flex h-full w-full cursor-pointer items-center justify-center rounded-md rounded-l-none bg-zinc-800"
                         htmlFor="right-click"
                       >
-                        <img
+                        <Image
+                          width={500}
+                          height={500}
                           className="m-1 h-8 w-8"
                           src="/rightclick.svg"
                           alt="Right-Click"

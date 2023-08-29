@@ -1,9 +1,8 @@
 import React from "react";
-import { Link, Button, Card, CardFooter } from "@nextui-org/react";
+import { Link, Card, CardFooter } from "@nextui-org/react";
 import Image from "next/image";
 import { type RouterOutputs } from "~/utils/api";
 import { listOfMaps } from "~/data/listOfMaps";
-import Nav from "~/components/Nav";
 import { getThumbnail } from "~/helpers/youtubeUrlHelpers";
 
 type UserNades = RouterOutputs["nades"]["getAll"][number];
@@ -31,8 +30,10 @@ const NadeCard = (props: UserNades) => {
         />
         <CardFooter className="absolute bottom-0 z-10 border-t-1 border-default-600 bg-black/40">
           <div className="flex w-full flex-grow items-center gap-2">
-            <img
+            <Image
               alt="Map Icon"
+              width={40}
+              height={40}
               className="h-11 w-10 rounded-full"
               src={
                 listOfMaps.find((map) => map.name === nade?.map)?.logo ??

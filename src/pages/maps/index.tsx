@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React from "react";
 import CreateNadeModal from "~/components/CreateNadeModal";
 import { PageLayout } from "~/components/layout";
@@ -19,17 +20,21 @@ const Maps = () => {
                 key={id}
                 className="group my-2 flex flex-col justify-between rounded-lg transition-all duration-200 hover:-translate-y-2 hover:opacity-50"
               >
-                <img
+                <Image
                   src={mapitem.background}
+                  width={500}
+                  height={500}
                   alt="Map Background"
-                  className="h-auto justify-normal rounded-t-lg"
+                  className="h-auto w-auto justify-normal rounded-t-lg"
                 />
                 <div
                   className="text-md flex w-full items-center rounded-b-lg bg-zinc-900 font-semibold text-text"
                   id="mapitem"
                 >
-                  <img
+                  <Image
                     src={mapitem.logo}
+                    width={256}
+                    height={256}
                     alt={mapitem.name}
                     className="mr-2 h-12 w-12 p-2"
                   />

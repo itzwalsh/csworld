@@ -14,9 +14,6 @@ import {
   DropdownMenu,
   DropdownSection,
   DropdownItem,
-  Card,
-  CardHeader,
-  CardFooter,
 } from "@nextui-org/react";
 import { SignInButton, useClerk, useUser } from "@clerk/nextjs";
 import { PiSignOutBold } from "react-icons/pi";
@@ -75,7 +72,7 @@ const UserDropdown = () => {
               color="danger"
               shortcut="shiftL"
               startContent={<PiSignOutBold className="text-3xl" />}
-              onClick={() => signOut()}
+              onClick={(e) => void signOut()}
             >
               Logout
             </DropdownItem>

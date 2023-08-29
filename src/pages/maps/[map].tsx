@@ -17,7 +17,7 @@ interface MapInterface {
   logo: string;
 }
 
-async function getMapData() {
+function getMapData() {
   const data = listOfMaps.map((map) => {
     return {
       name: map.name,
@@ -56,11 +56,13 @@ const MapPage: NextPage<{ mapData: MapInterface; hasError: boolean }> = ({
           <Link href="/maps" className="absolute z-10">
             <IoMdArrowRoundBack className="m-3 text-3xl" />
           </Link>
-          <div className="pointer-events-none flex select-none flex-col items-center justify-center gap-2">
+          <div className="pointer-events-none static flex select-none flex-col items-center justify-center gap-2">
             <Image
               src={mapData.background}
               alt="Map Background"
               fill
+              sizes="100vw"
+              layout="fill"
               priority
               className="pointer-events-none absolute select-none object-cover opacity-20"
             />
@@ -89,7 +91,7 @@ const MapPage: NextPage<{ mapData: MapInterface; hasError: boolean }> = ({
 export const getStaticProps: GetStaticProps = async (context) => {
   const mapName = context.params?.map;
 
-  const data = await getMapData();
+  const data = getMapData();
 
   const foundMap = data?.find(
     (item: MapInterface) => mapName === item.name.toLowerCase()
@@ -109,7 +111,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const data = await getMapData();
+  const data = getMapData();
   const pathsWithParams = data.map((map: MapInterface) => ({
     params: { map: map.name.toLowerCase() },
   }));

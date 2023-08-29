@@ -1,5 +1,5 @@
 export const getThumbnail = (videoUrl: string) => {
-  let video, results, maxRes, defaultRes;
+  let video, results;
   const getThumb = function (url: string) {
     if (url === null) {
       return "";
@@ -13,11 +13,11 @@ export const getThumbnail = (videoUrl: string) => {
 };
 
 export const getEmbedLink = (videoUrl: string) => {
-  let url;
-  if (url === null) {
+  if (videoUrl === null) {
     return "";
   }
-  url = videoUrl.replace("watch?v=", "embed/");
 
-  return url;
+  const replacedUrl = videoUrl.replace("watch?v=", "embed/");
+
+  return replacedUrl;
 };
