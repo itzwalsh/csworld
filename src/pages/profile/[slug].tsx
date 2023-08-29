@@ -2,7 +2,6 @@ import Head from "next/head";
 import { api } from "~/utils/api";
 import type { GetStaticPropsContext, NextPage } from "next";
 import Image from "next/image";
-import { LoadingSpinner } from "~/components/loading";
 import { generateSSGHelper } from "~/server/helpers/serverSideHelper";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import Link from "next/link";
@@ -10,8 +9,12 @@ import { PageLayout } from "~/components/layout";
 import RecentMatches from "~/components/RecentMatches";
 import { env } from "process";
 
-const apiKey = "91243727-594b-4f9e-a208-65a9a3fcb656";
+const apiKey = env.NEXT_PUBLIC_FACEIT_API_KEY;
 const playerId = "3e1b338d-4650-456a-a4eb-b2730f350509";
+
+interface MatchIdsInterface {
+  match_id: number;
+}
 
 async function getMatchIds(): Promise<string[]> {
   const getMatchIdsUrl = `https://open.faceit.com/data/v4/players/${playerId}/history?game=csgo&offset=0&limit=10`;
@@ -25,14 +28,14 @@ async function getMatchIds(): Promise<string[]> {
 
   if (res.status === 200) {
     const data = await res.json();
-    const matchIds = data.items.map((item: any) => item.match_id);
+    const matchIds = data.items.map((item: MatchIdsInterface) => item.match_id);
     return matchIds;
   } else {
     throw new Error("Failed to get match ids");
   }
 }
 
-async function getMatchStatsFromIds(matchIds: string[]): Promise<any[]> {
+async function getMatchStatsFromIds(matchIds: string[]): Promise<object[]> {
   const fetchPromises = matchIds.map(async (matchId) => {
     const getMatchStatsUrl = `https://open.faceit.com/data/v4/matches/${matchId}/stats`;
 
