@@ -13,7 +13,32 @@ const apiKey = env.NEXT_PUBLIC_FACEIT_API_KEY;
 const playerId = "3e1b338d-4650-456a-a4eb-b2730f350509";
 
 interface MatchIdsInterface {
-  match_id: number;
+  match_id: string;
+}
+
+interface MatchStatsInterface {
+  rounds: Array<{
+    round_stats: {
+      Map: string;
+    };
+    teams: Array<{
+      players: Array<{
+        player_id: string;
+        player_stats: {
+          Kills: string;
+          Assists: string;
+          Deaths: string;
+          "K/D Ratio": string;
+          "Headshots %": string;
+        };
+      }>;
+      team_stats: {
+        "Final Score": string;
+        "Team Win": string;
+        Team: string;
+      };
+    }>;
+  }>;
 }
 
 async function getMatchIds(): Promise<string[]> {
@@ -27,15 +52,19 @@ async function getMatchIds(): Promise<string[]> {
   });
 
   if (res.status === 200) {
-    const data = await res.json();
-    const matchIds = data.items.map((item: MatchIdsInterface) => item.match_id);
+    const data = (await res.json()) as { items: MatchIdsInterface[] };
+    const matchIds: string[] = data.items.map(
+      (item: MatchIdsInterface) => item.match_id
+    );
     return matchIds;
   } else {
     throw new Error("Failed to get match ids");
   }
 }
 
-async function getMatchStatsFromIds(matchIds: string[]): Promise<object[]> {
+async function getMatchStatsFromIds(
+  matchIds: string[]
+): Promise<(object | null)[]> {
   const fetchPromises = matchIds.map(async (matchId) => {
     const getMatchStatsUrl = `https://open.faceit.com/data/v4/matches/${matchId}/stats`;
 
@@ -48,7 +77,7 @@ async function getMatchStatsFromIds(matchIds: string[]): Promise<object[]> {
       });
 
       if (res.status === 200) {
-        const matchStats = await res.json();
+        const matchStats: object = await res.json();
         return matchStats;
       } else {
         console.log("Failed to get match statistics for match ID:", matchId);
@@ -74,7 +103,6 @@ const ProfilePage: NextPage<{ username: string; matchStatsArray: [] }> = ({
   const profileOwner = data?.username ?? data?.externalUsername ?? "unknown";
 
   if (!data) return <div>Something went wrong</div>;
-
   return (
     <>
       <Head>
