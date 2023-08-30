@@ -3,11 +3,12 @@ import { api } from "~/utils/api";
 import type { GetStaticPropsContext, NextPage } from "next";
 import Image from "next/image";
 import { generateSSGHelper } from "~/server/helpers/serverSideHelper";
-import { IoMdArrowRoundBack } from "react-icons/io";
-import Link from "next/link";
+import { BiUpload, BiLogoSteam } from "react-icons/bi";
+import { SiFaceit } from "react-icons/si";
 import { PageLayout } from "~/components/layout";
 import RecentMatches from "~/components/RecentMatches";
 import { env } from "process";
+import { toast } from "react-hot-toast";
 
 const apiKey = env.NEXT_PUBLIC_FACEIT_API_KEY;
 const playerId = "3e1b338d-4650-456a-a4eb-b2730f350509";
@@ -103,16 +104,42 @@ const ProfilePage: NextPage<{ username: string; matchStatsArray: [] }> = ({
   const profileOwner = data?.username ?? data?.externalUsername ?? "unknown";
 
   if (!data) return <div>Something went wrong</div>;
+
+  function handleUploadCoverImage() {
+    toast.success("I'll implement this later!");
+  }
   return (
     <>
       <Head>
         <title>{data.username ?? data.externalUsername}</title>
       </Head>
       <PageLayout>
-        <div className="relative left-0 right-0 mx-auto h-36 w-full bg-gray-900 md:w-10/12">
-          <Link href="/" className="m-3 inline-block">
-            <IoMdArrowRoundBack className="text-3xl" />
-          </Link>
+        <div className="relative left-0 right-0 mx-auto mt-12 h-64 w-11/12 bg-zinc-900">
+          <div className="flex justify-between">
+            <div className="m-3 flex gap-2">
+              <a
+                className="rounded-md bg-zinc-950 p-2"
+                href="https://www.faceit.com/en/players/ItZWalsh"
+                target="_blank"
+              >
+                <SiFaceit className="text-2xl text-accent" />
+              </a>
+              <a
+                className="rounded-md bg-zinc-950 p-2"
+                href="https://steamcommunity.com/id/walshyboi/"
+                target="_blank"
+              >
+                <BiLogoSteam className="text-2xl" />
+              </a>
+            </div>
+            <button
+              className="m-3 flex items-center justify-center gap-2 rounded-md bg-zinc-950 p-2 text-center"
+              onClick={handleUploadCoverImage}
+            >
+              <BiUpload className="text-xl" />
+              <p className="text-tiny">Upload Cover Image</p>
+            </button>
+          </div>
           <Image
             src={data.profilePicture}
             alt={`${

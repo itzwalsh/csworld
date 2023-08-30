@@ -18,7 +18,9 @@ const NadeCard = (props: UserNades) => {
       className="hover:opacity-50"
     >
       <Card
-        isFooterBlurred
+        classNames={{
+          base: "shadow-none",
+        }}
         className="col-span-12 h-[200px] w-[350px] min-w-[350px] max-w-[500px] sm:col-span-7 md:h-[250px] md:w-[450px]"
         key={nade?.id}
       >

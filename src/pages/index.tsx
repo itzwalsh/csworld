@@ -40,20 +40,20 @@ export default function Home() {
       <PageLayout>
         <div className="h-full min-h-screen">
           {/* Hero section: Welcome to CS World */}
-          <section className="flex flex-col items-center justify-center py-8 md:py-24">
-            <div className="flex w-full flex-1 flex-col items-center justify-center gap-12 px-20 text-center">
+          <section className="flex flex-col items-center justify-center">
+            <div className="mt-12 flex w-11/12 flex-1 flex-col items-center justify-center gap-4 bg-zinc-900 py-16 text-center md:py-28">
               <h1 className="w-full text-4xl font-bold md:text-6xl">
-                Welcome to <a className="text-accent">CS World!</a>
+                Welcome to <a className="text-accent">CS World</a>
               </h1>
               <p className="text-lg md:text-2xl">
                 {isSignedIn
-                  ? "Get started by adding your first nade"
+                  ? "Get started by adding a nade!"
                   : "Sign in to get started!"}
               </p>
               {isSignedIn && (
                 <div className="flex max-w-4xl flex-wrap items-center justify-around">
-                  <Link color="foreground" href="/maps" size="md">
-                    <button className="group w-48 rounded-xl border-2 bg-accent p-4 transition-all duration-200 hover:border-2 hover:border-accent hover:bg-text">
+                  <Link color="foreground" href="/maps">
+                    <button className="group w-48 rounded-xl bg-accent p-4 transition-all duration-200  hover:bg-text">
                       <h3 className="text-2xl font-bold group-hover:text-accent">
                         Create &rarr;
                       </h3>

@@ -1,10 +1,6 @@
 import Head from "next/head";
 import { api } from "~/utils/api";
-import type {
-  GetStaticPathsContext,
-  GetStaticPropsContext,
-  NextPage,
-} from "next";
+import type { GetStaticPropsContext, NextPage } from "next";
 import { PageLayout } from "~/components/layout";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import Link from "next/link";

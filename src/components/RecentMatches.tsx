@@ -146,7 +146,7 @@ const MatchCard: FC<Props> = (props) => {
                   </span>
                 </div>
 
-                <div className="absolute bottom-2 z-10 h-12 w-full rounded-b-md bg-zinc-950 md:-bottom-2">
+                <div className="absolute bottom-2 z-10 h-12 w-full border-b-2 border-white bg-zinc-900 md:-bottom-2">
                   <div className="flex h-full items-center justify-around align-middle">
                     <div className="flex items-center justify-center gap-1">
                       <IoPerson />

@@ -16,7 +16,7 @@ import {
   DropdownItem,
 } from "@nextui-org/react";
 import { SignInButton, useClerk, useUser } from "@clerk/nextjs";
-import { PiSignOutBold } from "react-icons/pi";
+import { PiSignOutBold, PiLinkBold } from "react-icons/pi";
 import { CgProfile } from "react-icons/cg";
 import Image from "next/image";
 import { navItems } from "~/data/navItems";
@@ -29,11 +29,17 @@ const UserDropdown = () => {
     window.location.pathname = `/profile/${user?.username}`;
   };
 
-  // console.log(user);
+  const handleConnectionsClick = () => {
+    window.location.pathname = `/connections`;
+  };
 
   return (
     <div className="flex w-full">
-      <Dropdown>
+      <Dropdown
+        classNames={{
+          base: "shadow-none",
+        }}
+      >
         <DropdownTrigger>
           {/* Create a div that has an a tag with the users imageURL, and another a tag with the user's username. The username should automatically push the image farther to the left until it runs out of room. */}
           <div className="flex w-auto cursor-pointer items-center gap-2 transition-all duration-150 hover:text-accent hover:brightness-75">
@@ -56,7 +62,7 @@ const UserDropdown = () => {
           variant="flat"
           aria-label="Dropdown menu with description"
         >
-          <DropdownSection title="Actions">
+          <DropdownSection title={user?.username ?? "User Name"}>
             <DropdownItem
               key="profile"
               shortcut="shiftP"
@@ -64,6 +70,16 @@ const UserDropdown = () => {
               onClick={() => handleProfileClick()}
             >
               Profile
+            </DropdownItem>
+          </DropdownSection>
+          <DropdownSection>
+            <DropdownItem
+              key="connections"
+              shortcut="shiftC"
+              startContent={<PiLinkBold className="text-3xl" />}
+              onClick={() => handleConnectionsClick()}
+            >
+              Connections
             </DropdownItem>
           </DropdownSection>
           <DropdownSection>
@@ -88,13 +104,19 @@ const Nav = () => {
   return (
     <div>
       <nav>
-        <div className="mx-auto flex flex-wrap items-center justify-start gap-8">
-          <Navbar disableAnimation isBordered maxWidth="2xl">
+        <div className="mx-auto flex w-11/12 flex-wrap items-center justify-start gap-2 md:gap-4">
+          <Navbar
+            disableAnimation
+            maxWidth="full"
+            classNames={{
+              base: "bg-zinc-950 border-b-2 border-zinc-900",
+            }}
+          >
             <NavbarContent className="sm:hidden" justify="start">
               <NavbarMenuToggle />
             </NavbarContent>
 
-            <NavbarContent className="pr-3 sm:hidden" justify="center">
+            <NavbarContent className="sm:hidden" justify="center">
               <NavbarBrand className="flex">
                 <Link
                   className="w-full gap-2 transition-all duration-200 hover:text-accent"
