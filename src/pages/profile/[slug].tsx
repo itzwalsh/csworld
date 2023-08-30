@@ -77,7 +77,7 @@ async function getMatchStatsFromIds(
       });
 
       if (res.status === 200) {
-        const matchStats: MatchStatsInterface = await res.json();
+        const matchStats = (await res.json()) as MatchStatsInterface; // Type assertion here
         return matchStats;
       } else {
         console.log("Failed to get match statistics for match ID:", matchId);
