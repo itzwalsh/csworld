@@ -64,7 +64,7 @@ async function getMatchIds(): Promise<string[]> {
 
 async function getMatchStatsFromIds(
   matchIds: string[]
-): Promise<(object | null)[]> {
+): Promise<(MatchStatsInterface | null)[]> {
   const fetchPromises = matchIds.map(async (matchId) => {
     const getMatchStatsUrl = `https://open.faceit.com/data/v4/matches/${matchId}/stats`;
 

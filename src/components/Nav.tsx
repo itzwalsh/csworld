@@ -72,7 +72,7 @@ const UserDropdown = () => {
               color="danger"
               shortcut="shiftL"
               startContent={<PiSignOutBold className="text-3xl" />}
-              onClick={(e) => void signOut()}
+              onClick={(_e) => void signOut()}
             >
               Logout
             </DropdownItem>
