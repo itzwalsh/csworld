@@ -8,6 +8,8 @@ import {
 } from "~/server/api/trpc";
 import { filterUserForClient } from "~/server/helpers/filterUserForClient";
 import type { Nade } from "@prisma/client";
+import { Ratelimit } from "@upstash/ratelimit"; // for deno: see above
+import { Redis } from "@upstash/redis";
 
 const addUserDataToNades = async (nades: Nade[]) => {
   const userList = await clerkClient.users.getUserList({
@@ -46,6 +48,13 @@ const addUserDataToNades = async (nades: Nade[]) => {
     };
   });
 };
+
+// Create a new ratelimiter, that allows 5 requests every 1 minute per authorId
+const ratelimit = new Ratelimit({
+  redis: Redis.fromEnv(),
+  limiter: Ratelimit.slidingWindow(5, "1 m"),
+  analytics: true,
+});
 
 export const nadesRouter = createTRPCRouter({
   getById: publicProcedure
@@ -127,6 +136,11 @@ export const nadesRouter = createTRPCRouter({
     )
     .mutation(async ({ ctx, input }) => {
       const authorId = ctx.userId;
+
+      //add rate limiter :)
+      const { success } = await ratelimit.limit(authorId);
+
+      if (!success) throw new TRPCError({ code: "TOO_MANY_REQUESTS" });
 
       const nade = await ctx.prisma.nade.create({
         data: {

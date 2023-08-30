@@ -7,7 +7,9 @@ export const PageLayout = (props: PropsWithChildren<object>) => {
     <>
       <Nav />
       <main className="flex h-full justify-center">
-        <div className="flex h-full w-full flex-col">{props.children}</div>
+        <div className="flex h-full min-h-screen w-full flex-col">
+          {props.children}
+        </div>
       </main>
       <Footer />
     </>
