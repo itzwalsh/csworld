@@ -1,4 +1,4 @@
-# Create T3 App
+# CS World
 
 CS World is a personal project created with [T3 Stack](https://create.t3.gg/) inspired by two of my favorite sites, CSGONades + CSGOStats.
 
