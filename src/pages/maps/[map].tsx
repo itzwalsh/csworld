@@ -1,6 +1,10 @@
 import Head from "next/head";
 import { api } from "~/utils/api";
-import type { GetStaticPropsContext, NextPage } from "next";
+import type {
+  GetStaticPathsContext,
+  GetStaticPropsContext,
+  NextPage,
+} from "next";
 import { PageLayout } from "~/components/layout";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import Link from "next/link";
@@ -10,26 +14,14 @@ import Image from "next/image";
 import NadeCard from "~/components/NadeCard";
 import { LoadingSpinner } from "~/components/loading";
 
-interface MapInterface {
+interface MapDataInterface {
   name: string;
   path: string;
   background: string;
   logo: string;
 }
 
-function getMapData() {
-  const data = listOfMaps.map((map) => {
-    return {
-      name: map.name,
-      path: map.path,
-      background: map.background,
-      logo: map.logo,
-    };
-  });
-  return data;
-}
-
-const MapPage: NextPage<{ mapData: MapInterface; hasError: boolean }> = ({
+const MapPage: NextPage<{ mapData: MapDataInterface; hasError: boolean }> = ({
   mapData,
   hasError,
 }) => {
@@ -89,12 +81,19 @@ const MapPage: NextPage<{ mapData: MapInterface; hasError: boolean }> = ({
 };
 
 export function getStaticProps(context: GetStaticPropsContext) {
-  const mapName = context.params?.map;
+  const mapPath = context.params!.map;
 
-  const data = getMapData();
+  const data = listOfMaps.map((map) => {
+    return {
+      name: map.name,
+      path: map.path,
+      background: map.background,
+      logo: map.logo,
+    };
+  });
 
   const foundMap = data?.find(
-    (item: MapInterface) => mapName === item.name.toLowerCase()
+    (item: MapDataInterface) => mapPath === item.path.replace("/", "")
   );
 
   if (!foundMap) {
@@ -112,14 +111,22 @@ export function getStaticProps(context: GetStaticPropsContext) {
 }
 
 export function getStaticPaths() {
-  const data = getMapData();
-  const pathsWithParams = data.map((map: MapInterface) => ({
-    params: { map: map.name.toLowerCase() },
+  const data = listOfMaps.map((map) => {
+    return {
+      name: map.name,
+      path: map.path,
+      background: map.background,
+      logo: map.logo,
+    };
+  });
+
+  const paths = data.map((map: MapDataInterface) => ({
+    params: { map: map.path.replace("/", "") },
   }));
 
   return {
-    paths: pathsWithParams,
-    fallback: true,
+    paths: paths,
+    fallback: false,
   };
 }
 
