@@ -107,6 +107,7 @@ export function getStaticProps(context: GetStaticPropsContext) {
     props: {
       mapData: foundMap,
     },
+    revalidate: 30,
   };
 }
 
