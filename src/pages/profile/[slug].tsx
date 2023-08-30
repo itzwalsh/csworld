@@ -39,6 +39,32 @@ interface MatchStatsInterface {
       };
     }>;
   }>;
+  match_id: string;
+}
+
+interface MatchStatsInterface {
+  rounds: Array<{
+    round_stats: {
+      Map: string;
+    };
+    teams: Array<{
+      players: Array<{
+        player_id: string;
+        player_stats: {
+          Kills: string;
+          Assists: string;
+          Deaths: string;
+          "K/D Ratio": string;
+          "Headshots %": string;
+        };
+      }>;
+      team_stats: {
+        "Final Score": string;
+        "Team Win": string;
+        Team: string;
+      };
+    }>;
+  }>;
 }
 
 async function getMatchIds(): Promise<string[]> {
@@ -56,12 +82,19 @@ async function getMatchIds(): Promise<string[]> {
     const matchIds: string[] = data.items.map(
       (item: MatchIdsInterface) => item.match_id
     );
+    const data = (await res.json()) as { items: MatchIdsInterface[] };
+    const matchIds: string[] = data.items.map(
+      (item: MatchIdsInterface) => item.match_id
+    );
     return matchIds;
   } else {
     throw new Error("Failed to get match ids");
   }
 }
 
+async function getMatchStatsFromIds(
+  matchIds: string[]
+): Promise<(object | null)[]> {
 async function getMatchStatsFromIds(
   matchIds: string[]
 ): Promise<(object | null)[]> {
