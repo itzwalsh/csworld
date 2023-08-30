@@ -52,9 +52,7 @@ const MapPage: NextPage<{ mapData: MapDataInterface; hasError: boolean }> = ({
             <Image
               src={mapData.background}
               alt="Map Background"
-              fill
-              sizes="100vw"
-              layout="fill"
+              fill={true}
               priority
               className="pointer-events-none absolute select-none object-cover opacity-20"
             />
