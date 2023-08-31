@@ -182,7 +182,7 @@ export const Nav = () => {
 
         <NavbarMenu>
           {navItems.map((item, index) => (
-            <NavbarMenuItem key={`${item}-${index}`}>
+            <NavbarMenuItem key={index}>
               <Link
                 className="w-full transition-all duration-200 hover:text-accent"
                 href={item.path}

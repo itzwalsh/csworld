@@ -1,6 +1,6 @@
 import { useUser } from "@clerk/nextjs";
 import { Link } from "@nextui-org/react";
-import { NextPage } from "next";
+import { type NextPage } from "next";
 import NadeCard from "~/components/NadeCard";
 import { LoadingPage } from "~/components/loading";
 import { api } from "~/utils/api";
