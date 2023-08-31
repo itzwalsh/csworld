@@ -1,11 +1,11 @@
 import { useUser } from "@clerk/nextjs";
 import { Link } from "@nextui-org/react";
+import { NextPage } from "next";
 import NadeCard from "~/components/NadeCard";
-import { PageLayout } from "~/components/layout";
 import { LoadingPage } from "~/components/loading";
 import { api } from "~/utils/api";
 
-function RecentNades() {
+const RecentNades = () => {
   const { data, isLoading: nadesLoading } = api.nades.getAll.useQuery();
 
   if (nadesLoading)
@@ -30,42 +30,40 @@ function RecentNades() {
       </div>
     </section>
   );
-}
+};
 
-export default function Home() {
+const Home: NextPage = () => {
   const { isSignedIn } = useUser();
 
   return (
     <>
-      <PageLayout>
-        <div className="h-full min-h-screen">
-          {/* Hero section: Welcome to CS World */}
-          <section className="flex flex-col items-center justify-center">
-            <div className="mt-12 flex w-11/12 flex-1 flex-col items-center justify-center gap-4 bg-zinc-900 py-16 text-center md:py-28">
-              <h1 className="w-full text-4xl font-bold md:text-6xl">
-                Welcome to <a className="text-accent">CS World</a>
-              </h1>
-              <p className="text-lg md:text-2xl">
-                {isSignedIn
-                  ? "Get started by adding a nade!"
-                  : "Sign in to get started!"}
-              </p>
-              {isSignedIn && (
-                <div className="flex max-w-4xl flex-wrap items-center justify-around">
-                  <Link color="foreground" href="/maps">
-                    <button className="group w-48 rounded-xl bg-accent p-4 transition-all duration-200  hover:bg-text">
-                      <h3 className="text-2xl font-bold group-hover:text-accent">
-                        Create &rarr;
-                      </h3>
-                    </button>
-                  </Link>
-                </div>
-              )}
+      {/* Hero section: Welcome to CS World */}
+      <section className="flex flex-col items-center justify-center">
+        <div className="mt-12 flex w-11/12 flex-1 flex-col items-center justify-center gap-4 bg-zinc-900 py-16 text-center md:py-28">
+          <h1 className="w-full text-4xl font-bold md:text-6xl">
+            Welcome to <a className="text-accent">CS World</a>
+          </h1>
+          <p className="text-lg md:text-2xl">
+            {isSignedIn
+              ? "Get started by adding a nade!"
+              : "Sign in to get started!"}
+          </p>
+          {isSignedIn && (
+            <div className="flex max-w-4xl flex-wrap items-center justify-around">
+              <Link color="foreground" href="/maps">
+                <button className="group w-48 rounded-xl bg-accent p-4 transition-all duration-200  hover:bg-text">
+                  <h3 className="text-2xl font-bold group-hover:text-accent">
+                    Create &rarr;
+                  </h3>
+                </button>
+              </Link>
             </div>
-          </section>
-          <RecentNades />
+          )}
         </div>
-      </PageLayout>
+        <RecentNades />
+      </section>
     </>
   );
-}
+};
+
+export default Home;

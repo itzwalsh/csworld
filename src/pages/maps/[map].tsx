@@ -1,7 +1,6 @@
 import Head from "next/head";
 import { api } from "~/utils/api";
 import type { GetStaticPropsContext, NextPage } from "next";
-import { PageLayout } from "~/components/layout";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import Link from "next/link";
 import { listOfMaps } from "~/data/listOfMaps";
@@ -39,37 +38,35 @@ const MapPage: NextPage<{ mapData: MapDataInterface; hasError: boolean }> = ({
         <link rel="icon" href={`${mapData.logo}`} />
         <title>{`CS World - ${mapData.name}`}</title>
       </Head>
-      <PageLayout>
-        <div className="relative min-h-screen w-full">
-          <Link href="/maps" className="absolute z-10">
-            <IoMdArrowRoundBack className="m-3 text-3xl" />
-          </Link>
-          <div className="pointer-events-none static flex select-none flex-col items-center justify-center gap-2">
-            <Image
-              src={mapData.background}
-              alt="Map Background"
-              fill={true}
-              priority
-              className="pointer-events-none absolute select-none object-cover opacity-20"
-            />
-            <Image
-              src={mapData.logo}
-              alt="Map Logo"
-              width={72}
-              height={72}
-              className="mt-4"
-              priority
-            />
-            <h1 className="select-none text-4xl">{mapData.name}</h1>
-          </div>
-
-          <div className="flex w-full flex-1 flex-col items-center justify-center gap-4 py-12 text-center md:flex-row md:flex-wrap">
-            {data?.map((mapNades) => (
-              <NadeCard {...mapNades} key={mapNades.nade.id} />
-            )) ?? <LoadingSpinner size={36} />}
-          </div>
+      <div className="relative min-h-screen w-full">
+        <Link href="/maps" className="absolute z-10">
+          <IoMdArrowRoundBack className="m-3 text-3xl" />
+        </Link>
+        <div className="pointer-events-none static flex select-none flex-col items-center justify-center gap-2">
+          <Image
+            src={mapData.background}
+            alt="Map Background"
+            fill={true}
+            priority
+            className="pointer-events-none absolute select-none object-cover opacity-20"
+          />
+          <Image
+            src={mapData.logo}
+            alt="Map Logo"
+            width={72}
+            height={72}
+            className="mt-4"
+            priority
+          />
+          <h1 className="select-none text-4xl">{mapData.name}</h1>
         </div>
-      </PageLayout>
+
+        <div className="flex w-full flex-1 flex-col items-center justify-center gap-4 py-12 text-center md:flex-row md:flex-wrap">
+          {data?.map((mapNades) => (
+            <NadeCard {...mapNades} key={mapNades.nade.id} />
+          )) ?? <LoadingSpinner size={36} />}
+        </div>
+      </div>
     </>
   );
 };

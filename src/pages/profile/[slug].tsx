@@ -5,7 +5,6 @@ import Image from "next/image";
 import { generateSSGHelper } from "~/server/helpers/serverSideHelper";
 import { BiUpload, BiLogoSteam } from "react-icons/bi";
 import { SiFaceit } from "react-icons/si";
-import { PageLayout } from "~/components/layout";
 import RecentMatches from "~/components/RecentMatches";
 import { env } from "process";
 import { toast } from "react-hot-toast";
@@ -113,59 +112,57 @@ const ProfilePage: NextPage<{ username: string; matchStatsArray: [] }> = ({
       <Head>
         <title>{data.username ?? data.externalUsername}</title>
       </Head>
-      <PageLayout>
-        <div className="relative left-0 right-0 mx-auto mt-12 h-64 w-11/12 bg-zinc-900">
-          <div className="flex justify-between">
-            <div className="m-3 flex gap-2">
-              <a
-                className="rounded-md bg-zinc-950 p-2"
-                href="https://www.faceit.com/en/players/ItZWalsh"
-                target="_blank"
-              >
-                <SiFaceit className="text-2xl text-accent" />
-              </a>
-              <a
-                className="rounded-md bg-zinc-950 p-2"
-                href="https://steamcommunity.com/id/walshyboi/"
-                target="_blank"
-              >
-                <BiLogoSteam className="text-2xl" />
-              </a>
-            </div>
-            <button
-              className="m-3 flex items-center justify-center gap-2 rounded-md bg-zinc-950 p-2 text-center"
-              onClick={handleUploadCoverImage}
+      <div className="relative left-0 right-0 mx-auto mt-12 h-64 w-11/12 bg-zinc-900">
+        <div className="flex justify-between">
+          <div className="m-3 flex gap-2">
+            <a
+              className="rounded-md bg-zinc-950 p-2"
+              href="https://www.faceit.com/en/players/ItZWalsh"
+              target="_blank"
             >
-              <BiUpload className="text-xl" />
-              <p className="text-tiny">Upload Cover Image</p>
-            </button>
+              <SiFaceit className="text-2xl text-accent" />
+            </a>
+            <a
+              className="rounded-md bg-zinc-950 p-2"
+              href="https://steamcommunity.com/id/walshyboi/"
+              target="_blank"
+            >
+              <BiLogoSteam className="text-2xl" />
+            </a>
           </div>
-          <Image
-            src={data.profilePicture}
-            alt={`${
-              data.username ?? data.externalUsername ?? "unknown"
-            }'s profile picture`}
-            width={128}
-            height={128}
-            priority
-            unoptimized={true}
-            className="absolute bottom-0 left-0 right-0 mx-auto -mb-[64px] rounded-full bg-background ring-4 ring-text"
+          <button
+            className="m-3 flex items-center justify-center gap-2 rounded-md bg-zinc-950 p-2 text-center"
+            onClick={handleUploadCoverImage}
+          >
+            <BiUpload className="text-xl" />
+            <p className="text-tiny">Upload Cover Image</p>
+          </button>
+        </div>
+        <Image
+          src={data.profilePicture}
+          alt={`${
+            data.username ?? data.externalUsername ?? "unknown"
+          }'s profile picture`}
+          width={128}
+          height={128}
+          priority
+          unoptimized={true}
+          className="absolute bottom-0 left-0 right-0 mx-auto -mb-[64px] rounded-full bg-background ring-4 ring-text"
+        />
+      </div>
+      <div className="h-[64px]"></div>
+      <div className="flex justify-center p-4 text-2xl font-bold">
+        {profileOwner}
+      </div>
+      <div className="left-0 right-0 mx-auto flex h-full w-full flex-col items-center justify-center gap-8 border-t border-gray-400 py-4 text-xl font-medium md:w-10/12">
+        <p>{`${profileOwner}'s recent matches`}</p>
+        <div className="flex w-full flex-1 flex-col items-center justify-center gap-4 text-center text-text md:flex-row md:flex-wrap">
+          <RecentMatches
+            matchStatsArray={matchStatsArray}
+            playerId={playerId}
           />
         </div>
-        <div className="h-[64px]"></div>
-        <div className="flex justify-center p-4 text-2xl font-bold">
-          {profileOwner}
-        </div>
-        <div className="left-0 right-0 mx-auto flex h-full w-full flex-col items-center justify-center gap-8 border-t border-gray-400 py-4 text-xl font-medium md:w-10/12">
-          <p>{`${profileOwner}'s recent matches`}</p>
-          <div className="flex w-full flex-1 flex-col items-center justify-center gap-4 text-center text-text md:flex-row md:flex-wrap">
-            <RecentMatches
-              matchStatsArray={matchStatsArray}
-              playerId={playerId}
-            />
-          </div>
-        </div>
-      </PageLayout>
+      </div>
     </>
   );
 };
