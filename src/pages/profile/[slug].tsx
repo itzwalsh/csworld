@@ -147,7 +147,7 @@ const ProfilePage: NextPage<{ username: string; matchStatsArray: [] }> = ({
           height={128}
           priority
           unoptimized={true}
-          className="absolute bottom-0 left-0 right-0 mx-auto -mb-[64px] rounded-full bg-background ring-4 ring-text"
+          className="absolute bottom-0 left-0 right-0 mx-auto -mb-[64px] rounded-full bg-zinc-950 ring-4 ring-text"
         />
       </div>
       <div className="h-[64px]"></div>

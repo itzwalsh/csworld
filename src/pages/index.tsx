@@ -1,4 +1,4 @@
-import { useUser } from "@clerk/nextjs";
+import { SignInButton, useUser } from "@clerk/nextjs";
 import { Link } from "@nextui-org/react";
 import { type NextPage } from "next";
 import NadeCard from "~/components/NadeCard";
@@ -39,7 +39,7 @@ const Home: NextPage = () => {
     <>
       {/* Hero section: Welcome to CS World */}
       <section className="flex flex-col items-center justify-center">
-        <div className="mt-12 flex w-11/12 flex-1 flex-col items-center justify-center gap-4 bg-zinc-900 py-16 text-center md:py-28">
+        <div className="mt-12 flex w-11/12 flex-1 flex-col items-center justify-center gap-4 bg-zinc-900 py-16 text-center md:gap-8 md:py-28">
           <h1 className="w-full text-4xl font-bold md:text-6xl">
             Welcome to <a className="text-accent">CS World</a>
           </h1>
@@ -48,8 +48,8 @@ const Home: NextPage = () => {
               ? "Get started by adding a nade!"
               : "Sign in to get started!"}
           </p>
-          {isSignedIn && (
-            <div className="flex max-w-4xl flex-wrap items-center justify-around">
+          <div className="flex max-w-4xl flex-wrap items-center justify-around">
+            {isSignedIn ? (
               <Link color="foreground" href="/maps">
                 <button className="group w-48 rounded-xl bg-accent p-4 transition-all duration-200  hover:bg-text">
                   <h3 className="text-2xl font-bold group-hover:text-accent">
@@ -57,10 +57,20 @@ const Home: NextPage = () => {
                   </h3>
                 </button>
               </Link>
-            </div>
-          )}
+            ) : (
+              <Link color="foreground" href="/maps">
+                <SignInButton>
+                  <button className="group w-48 rounded-xl bg-accent p-4 transition-all duration-200  hover:bg-text">
+                    <h3 className="text-2xl font-bold group-hover:text-accent">
+                      Sign in &rarr;
+                    </h3>
+                  </button>
+                </SignInButton>
+              </Link>
+            )}
+          </div>
         </div>
-        <RecentNades />
+        {isSignedIn && <RecentNades />}
       </section>
     </>
   );
