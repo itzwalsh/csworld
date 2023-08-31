@@ -5,7 +5,7 @@ import { listOfMaps } from "~/data/listOfMaps";
 
 const Maps = () => {
   return (
-    <div className="h-fit px-8 py-4 md:mx-16 xl:h-screen">
+    <div className="h-full px-8 py-4 md:mx-16">
       <div className="flex justify-end">
         <CreateNadeModal />
       </div>
