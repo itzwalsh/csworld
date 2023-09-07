@@ -7,7 +7,8 @@ import { listOfMaps } from "~/data/listOfMaps";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import NadeCard from "~/components/NadeCard";
-import { LoadingSpinner } from "~/components/loading";
+import { useState } from "react";
+import { Checkbox, CheckboxGroup, Skeleton } from "@nextui-org/react";
 
 interface MapDataInterface {
   name: string;
@@ -20,11 +21,11 @@ const MapPage: NextPage<{ mapData: MapDataInterface; hasError: boolean }> = ({
   mapData,
   hasError,
 }) => {
-  const { data } = api.nades.getNadesByMap.useQuery({
+  const { data, isFetched: nadesFetched } = api.nades.getNadesByMap.useQuery({
     map: mapData.name,
   });
   const router = useRouter();
-
+  const [selected, setSelected] = useState(["cs2"]);
   if (hasError) {
     return <h1>Error - please try another parameter</h1>;
   }
@@ -60,11 +61,31 @@ const MapPage: NextPage<{ mapData: MapDataInterface; hasError: boolean }> = ({
           />
           <h1 className="select-none text-4xl">{mapData.name}</h1>
         </div>
+        {/* Filters */}
+        <div className="mt-6 flex flex-col items-center gap-4">
+          <CheckboxGroup
+            color="primary"
+            value={selected}
+            orientation="horizontal"
+            onValueChange={setSelected}
+          >
+            <Checkbox value="cs2">CS2</Checkbox>
+            <Checkbox value="csgo">CS:GO</Checkbox>
+            <Checkbox value="terrorist">T-Sided</Checkbox>
+            <Checkbox value="counter-terrorist">CT-Sided</Checkbox>
+          </CheckboxGroup>
+        </div>
 
         <div className="flex w-full flex-1 flex-col items-center justify-center gap-4 py-12 text-center md:flex-row md:flex-wrap">
           {data?.map((mapNades) => (
-            <NadeCard {...mapNades} key={mapNades.nade.id} />
-          )) ?? <LoadingSpinner size={36} />}
+            <Skeleton
+              isLoaded={nadesFetched}
+              key={mapNades.nade.id}
+              className="h-[200px] w-[350px] min-w-[350px] max-w-[500px] rounded-xl md:h-[250px] md:w-[450px]"
+            >
+              <NadeCard {...mapNades} />
+            </Skeleton>
+          ))}
         </div>
       </div>
     </>

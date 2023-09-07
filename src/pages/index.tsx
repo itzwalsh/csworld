@@ -1,31 +1,29 @@
 import { SignInButton, useUser } from "@clerk/nextjs";
-import { Link } from "@nextui-org/react";
+import { Link, Skeleton } from "@nextui-org/react";
 import { type NextPage } from "next";
 import NadeCard from "~/components/NadeCard";
-import { LoadingPage } from "~/components/loading";
 import { api } from "~/utils/api";
 
 const RecentNades = () => {
   const { data, isLoading: nadesLoading } = api.nades.getAll.useQuery();
 
-  if (nadesLoading)
-    return (
-      <div className="flex-grow">
-        <LoadingPage />
-      </div>
-    );
-
   if (!data) return <div>Something went wrong</div>;
 
   /* User's most viewed nades */
   return (
-    <section className="flex flex-col items-center justify-center gap-8 py-2 md:py-8">
+    <section className="flex flex-col items-center justify-center gap-4 py-4 md:gap-8 md:py-8">
       <h1 className="flex w-full items-center justify-center text-3xl font-bold">
         Recently added nades
       </h1>
       <div className="flex w-full flex-1 flex-col items-center justify-center gap-4 px-20 text-center md:flex-row md:flex-wrap">
         {data.slice(0, 3).map((recentNades) => (
-          <NadeCard {...recentNades} key={recentNades.nade.id} />
+          <Skeleton
+            isLoaded={!nadesLoading}
+            className="h-[200px] w-[350px] min-w-[350px] max-w-[500px] rounded-xl md:h-[250px] md:w-[450px]"
+            key={recentNades.nade.id}
+          >
+            <NadeCard {...recentNades} />
+          </Skeleton>
         ))}
       </div>
     </section>
